@@ -1,1 +1,900 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SERENOVA | ライフシフト・コンパス — 退職後のお金、誰に相談していますか？</title>
+<meta name="description" content="セレノバ金融教育ラボ。完全独立・手数料ゼロ。退職前後の世代のための金融教育・ライフプランニング支援サービス。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --teal-dark: #1a3d35;
+  --teal: #1a5c4a;
+  --teal-mid: #2a7a62;
+  --teal-light: #e0eeea;
+  --teal-pale: #f0f8f5;
+  --gold: #b8943f;
+  --gold-light: #d4ac57;
+  --gold-pale: #fdf6e9;
+  --cream: #f8f4ed;
+  --cream-dark: #ede8df;
+  --ink: #1a1a17;
+  --ink-mid: #3d3d38;
+  --ink-soft: #6b6b63;
+  --white: #fdfcf8;
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --sans: 'DM Sans', sans-serif;
+}
 
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  background: var(--white);
+  color: var(--ink);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 48px;
+  background: rgba(253,252,248,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 0.5px solid rgba(26,60,53,0.12);
+  transition: all .3s;
+}
+.nav-logo {
+  font-family: var(--serif);
+  font-size: 22px; font-weight: 600;
+  letter-spacing: .1em; color: var(--teal-dark);
+}
+.nav-logo span { color: var(--gold); }
+.nav-links {
+  display: flex; gap: 32px;
+  font-size: 13px; color: var(--ink-soft);
+  list-style: none;
+}
+.nav-links a {
+  text-decoration: none; color: inherit;
+  transition: color .2s;
+}
+.nav-links a:hover { color: var(--teal); }
+.nav-btn {
+  background: var(--teal);
+  color: var(--white);
+  border: none; border-radius: 3px;
+  font-family: var(--sans); font-size: 12px; font-weight: 500;
+  letter-spacing: .06em; padding: 10px 22px;
+  cursor: pointer; transition: background .2s;
+}
+.nav-btn:hover { background: var(--teal-mid); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding-top: 72px;
+}
+.hero-left {
+  background: var(--teal-dark);
+  padding: 80px 60px 80px 72px;
+  display: flex; flex-direction: column; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.hero-left::before {
+  content: '';
+  position: absolute; right: -80px; top: -80px;
+  width: 320px; height: 320px;
+  border: 0.5px solid rgba(255,255,255,.06);
+  border-radius: 50%;
+}
+.hero-left::after {
+  content: '';
+  position: absolute; right: -30px; bottom: 60px;
+  width: 180px; height: 180px;
+  border: 0.5px solid rgba(184,148,63,.2);
+  border-radius: 50%;
+}
+.hero-eyebrow {
+  font-size: 11px; font-weight: 500;
+  letter-spacing: .18em; text-transform: uppercase;
+  color: var(--gold-light); margin-bottom: 28px;
+  opacity: 0; animation: fadeUp .6s .1s ease forwards;
+}
+.hero-h1 {
+  font-family: var(--serif);
+  font-size: 52px; font-weight: 300; line-height: 1.12;
+  color: #fff; margin-bottom: 24px;
+  opacity: 0; animation: fadeUp .6s .2s ease forwards;
+}
+.hero-h1 em { font-style: italic; color: var(--gold-light); }
+.hero-sub {
+  font-size: 14px; color: rgba(255,255,255,.65);
+  line-height: 1.75; max-width: 380px; margin-bottom: 44px;
+  opacity: 0; animation: fadeUp .6s .3s ease forwards;
+}
+.hero-btns {
+  display: flex; gap: 14px; flex-wrap: wrap;
+  opacity: 0; animation: fadeUp .6s .4s ease forwards;
+}
+.btn-gold {
+  background: var(--gold); color: var(--ink);
+  border: none; border-radius: 3px;
+  font-family: var(--sans); font-size: 13px; font-weight: 500;
+  letter-spacing: .04em; padding: 14px 32px;
+  cursor: pointer; transition: background .2s;
+  text-decoration: none; display: inline-block;
+}
+.btn-gold:hover { background: var(--gold-light); }
+.btn-outline {
+  background: transparent;
+  color: rgba(255,255,255,.75);
+  border: 0.5px solid rgba(255,255,255,.3);
+  border-radius: 3px;
+  font-family: var(--sans); font-size: 13px;
+  letter-spacing: .02em; padding: 14px 24px;
+  cursor: pointer; transition: all .2s;
+  text-decoration: none; display: inline-block;
+}
+.btn-outline:hover { border-color: rgba(255,255,255,.6); color: #fff; }
+
+/* hero-right: signal cards */
+.hero-right {
+  background: var(--cream);
+  padding: 60px 56px;
+  display: flex; flex-direction: column; justify-content: center; gap: 16px;
+}
+.signals-label {
+  font-size: 11px; font-weight: 500;
+  letter-spacing: .1em; text-transform: uppercase;
+  color: var(--ink-soft); margin-bottom: 4px;
+}
+.signal-card {
+  background: var(--white);
+  border: 0.5px solid var(--cream-dark);
+  border-radius: 6px; padding: 16px 20px;
+  transition: transform .2s, box-shadow .2s;
+}
+.signal-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.06); }
+.signal-head {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 8px;
+}
+.signal-dot {
+  width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+}
+.dot-green { background: #2e9a6a; }
+.dot-amber { background: #c97f1a; }
+.dot-gray { background: #aaa; }
+.signal-name { font-size: 13px; font-weight: 500; color: var(--ink-mid); }
+.signal-badge {
+  margin-left: auto; font-size: 10px; font-weight: 500;
+  padding: 2px 9px; border-radius: 20px;
+}
+.bg-green { background: #e6f5ee; color: #1a6b44; }
+.bg-amber { background: #fef3e2; color: #7a4a0a; }
+.bg-gray { background: #f0efea; color: #666; }
+.signal-body { font-size: 11px; color: var(--ink-soft); line-height: 1.55; }
+.signal-body strong { color: var(--ink-mid); font-weight: 500; }
+.signal-footer { font-size: 10px; color: var(--ink-soft); text-align: center; margin-top: 4px; }
+
+/* ── TICKER ── */
+.ticker {
+  background: var(--teal-dark);
+  padding: 12px 0; overflow: hidden;
+  border-top: 0.5px solid rgba(255,255,255,.08);
+}
+.ticker-inner {
+  display: flex; gap: 64px;
+  animation: ticker 28s linear infinite;
+  white-space: nowrap;
+}
+.ticker-item {
+  font-size: 12px; font-weight: 500;
+  letter-spacing: .08em; color: rgba(255,255,255,.5);
+  text-transform: uppercase;
+}
+.ticker-item span { color: var(--gold-light); margin-right: 12px; }
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ── PAIN ── */
+.pain {
+  background: var(--white);
+  padding: 96px 72px;
+  text-align: center;
+}
+.section-eyebrow {
+  font-size: 11px; font-weight: 500;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 14px;
+}
+.section-title {
+  font-family: var(--serif);
+  font-size: 42px; font-weight: 300;
+  color: var(--ink); line-height: 1.2; margin-bottom: 16px;
+}
+.section-title em { font-style: italic; color: var(--teal); }
+.section-sub {
+  font-size: 14px; color: var(--ink-soft);
+  max-width: 580px; margin: 0 auto 56px; line-height: 1.75;
+}
+.pain-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 24px; max-width: 920px; margin: 0 auto;
+}
+.pain-card {
+  background: var(--cream);
+  border: 0.5px solid var(--cream-dark);
+  border-radius: 8px; padding: 32px 26px; text-align: left;
+  position: relative; overflow: hidden;
+  transition: transform .2s;
+}
+.pain-card:hover { transform: translateY(-3px); }
+.pain-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0;
+  width: 3px; height: 100%;
+  background: var(--gold);
+}
+.pain-num {
+  font-family: var(--serif); font-size: 48px;
+  font-weight: 300; color: var(--cream-dark);
+  line-height: 1; margin-bottom: 14px;
+}
+.pain-title {
+  font-size: 15px; font-weight: 500;
+  color: var(--ink); margin-bottom: 10px;
+}
+.pain-desc {
+  font-size: 13px; color: var(--ink-soft); line-height: 1.65;
+}
+
+/* ── FEATURES ── */
+.features {
+  background: var(--teal-pale);
+  padding: 96px 72px;
+}
+.features-inner { max-width: 960px; margin: 0 auto; }
+.features-header { text-align: center; margin-bottom: 56px; }
+.feat-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.feat-card {
+  background: var(--white);
+  border: 0.5px solid var(--cream-dark);
+  border-radius: 8px; padding: 28px 30px;
+  transition: transform .2s, box-shadow .2s;
+}
+.feat-card:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(0,0,0,.06); }
+.feat-card.wide { grid-column: span 2; }
+.feat-num {
+  font-family: var(--serif); font-size: 44px;
+  font-weight: 300; color: var(--gold);
+  line-height: 1; margin-bottom: 12px;
+}
+.feat-title {
+  font-size: 15px; font-weight: 500;
+  color: var(--ink); margin-bottom: 8px;
+}
+.feat-desc {
+  font-size: 13px; color: var(--ink-soft); line-height: 1.65;
+}
+.feat-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+.feat-tag {
+  font-size: 10px; color: var(--teal);
+  background: var(--teal-light);
+  padding: 3px 10px; border-radius: 20px;
+}
+
+/* ── PHILOSOPHY ── */
+.philosophy {
+  background: var(--teal-dark);
+  padding: 96px 72px;
+}
+.phil-inner { max-width: 960px; margin: 0 auto; }
+.phil-header { margin-bottom: 52px; }
+.phil-eyebrow {
+  font-size: 11px; font-weight: 500;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--gold-light); margin-bottom: 14px;
+}
+.phil-title {
+  font-family: var(--serif); font-size: 44px;
+  font-weight: 300; color: #fff; line-height: 1.2;
+}
+.phil-title em { font-style: italic; color: var(--gold-light); }
+.phil-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1px; background: rgba(255,255,255,.08);
+  border-radius: 8px; overflow: hidden;
+}
+.phil-item {
+  background: rgba(255,255,255,.03);
+  padding: 32px 28px;
+  transition: background .2s;
+}
+.phil-item:hover { background: rgba(255,255,255,.06); }
+.phil-step {
+  font-size: 11px; letter-spacing: .12em;
+  color: var(--gold-light); font-weight: 500; margin-bottom: 12px;
+}
+.phil-item-title {
+  font-family: var(--serif); font-size: 20px;
+  font-weight: 400; color: #fff; margin-bottom: 10px;
+  line-height: 1.35;
+}
+.phil-item-desc {
+  font-size: 13px; color: rgba(255,255,255,.55);
+  line-height: 1.65;
+}
+
+/* ── COMPLIANCE BADGE ── */
+.compliance {
+  background: var(--cream);
+  padding: 48px 72px;
+  border-top: 0.5px solid var(--cream-dark);
+  border-bottom: 0.5px solid var(--cream-dark);
+}
+.compliance-inner {
+  max-width: 960px; margin: 0 auto;
+  display: flex; align-items: center; gap: 40px;
+}
+.compliance-icon {
+  font-size: 36px; flex-shrink: 0;
+}
+.compliance-text h3 {
+  font-size: 15px; font-weight: 500;
+  color: var(--teal-dark); margin-bottom: 6px;
+}
+.compliance-text p {
+  font-size: 13px; color: var(--ink-soft); line-height: 1.6;
+}
+.compliance-badges {
+  margin-left: auto; display: flex; gap: 12px; flex-shrink: 0;
+}
+.badge {
+  background: var(--teal-light);
+  color: var(--teal);
+  font-size: 11px; font-weight: 500;
+  padding: 6px 14px; border-radius: 3px;
+  letter-spacing: .04em;
+}
+
+/* ── PLANS ── */
+.plans {
+  background: var(--white);
+  padding: 96px 72px;
+}
+.plans-inner { max-width: 960px; margin: 0 auto; }
+.plans-header { text-align: center; margin-bottom: 52px; }
+.plans-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.plan-card {
+  border: 0.5px solid var(--cream-dark);
+  border-radius: 10px; padding: 32px 26px;
+  position: relative;
+  transition: transform .2s, box-shadow .2s;
+}
+.plan-card:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(0,0,0,.08); }
+.plan-card.featured {
+  border: 1.5px solid var(--teal);
+  background: var(--teal-dark); color: #fff;
+}
+.plan-popular {
+  position: absolute; top: -12px; left: 50%;
+  transform: translateX(-50%);
+  background: var(--gold); color: var(--ink);
+  font-size: 10px; font-weight: 500;
+  padding: 4px 14px; border-radius: 20px;
+  white-space: nowrap; letter-spacing: .06em;
+}
+.plan-name {
+  font-size: 11px; font-weight: 500;
+  letter-spacing: .1em; text-transform: uppercase;
+  color: var(--ink-soft); margin-bottom: 10px;
+}
+.plan-card.featured .plan-name { color: rgba(255,255,255,.5); }
+.plan-price {
+  font-family: var(--serif); font-size: 44px;
+  font-weight: 300; color: var(--ink); line-height: 1;
+  margin-bottom: 4px;
+}
+.plan-card.featured .plan-price { color: #fff; }
+.plan-per {
+  font-size: 12px; color: var(--ink-soft); margin-bottom: 24px;
+}
+.plan-card.featured .plan-per { color: rgba(255,255,255,.5); }
+.plan-feats {
+  list-style: none; margin-bottom: 28px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.plan-feats li {
+  font-size: 13px; color: var(--ink-soft);
+  display: flex; align-items: flex-start; gap: 8px; line-height: 1.5;
+}
+.plan-card.featured .plan-feats li { color: rgba(255,255,255,.7); }
+.plan-feats li::before {
+  content: '—'; color: var(--gold); flex-shrink: 0; font-weight: 300;
+}
+.plan-btn {
+  width: 100%; padding: 13px;
+  border-radius: 4px; border: 0.5px solid var(--teal);
+  background: transparent; color: var(--teal);
+  font-family: var(--sans); font-size: 13px; font-weight: 500;
+  letter-spacing: .04em; cursor: pointer; transition: all .2s;
+}
+.plan-btn:hover { background: var(--teal); color: #fff; }
+.plan-card.featured .plan-btn {
+  background: var(--gold); color: var(--ink); border-color: var(--gold);
+}
+.plan-card.featured .plan-btn:hover { background: var(--gold-light); }
+
+/* ── TRUST ── */
+.trust {
+  background: var(--cream);
+  padding: 80px 72px;
+}
+.trust-inner { max-width: 960px; margin: 0 auto; text-align: center; }
+.trust-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 32px; margin-top: 48px;
+}
+.trust-item { text-align: center; }
+.trust-num {
+  font-family: var(--serif); font-size: 48px;
+  font-weight: 300; color: var(--teal); line-height: 1;
+  margin-bottom: 8px;
+}
+.trust-label {
+  font-size: 12px; color: var(--ink-soft); line-height: 1.5;
+}
+
+/* ── CTA ── */
+.cta-section {
+  background: var(--white);
+  padding: 96px 72px;
+  text-align: center;
+  border-top: 0.5px solid var(--cream-dark);
+}
+.cta-title {
+  font-family: var(--serif); font-size: 46px;
+  font-weight: 300; color: var(--ink); line-height: 1.2;
+  margin-bottom: 16px;
+}
+.cta-title em { font-style: italic; color: var(--teal); }
+.cta-sub {
+  font-size: 14px; color: var(--ink-soft);
+  max-width: 500px; margin: 0 auto 36px; line-height: 1.75;
+}
+.cta-form {
+  display: flex; gap: 10px;
+  max-width: 460px; margin: 0 auto 14px;
+}
+.cta-input {
+  flex: 1; padding: 14px 18px;
+  border: 0.5px solid var(--cream-dark);
+  border-radius: 4px;
+  font-family: var(--sans); font-size: 13px;
+  background: var(--cream); color: var(--ink);
+  outline: none; transition: border-color .2s;
+}
+.cta-input:focus { border-color: var(--teal); background: #fff; }
+.btn-teal {
+  background: var(--teal); color: var(--white);
+  border: none; border-radius: 4px;
+  font-family: var(--sans); font-size: 13px; font-weight: 500;
+  padding: 14px 26px; cursor: pointer; white-space: nowrap;
+  transition: background .2s; letter-spacing: .04em;
+}
+.btn-teal:hover { background: var(--teal-mid); }
+.cta-note {
+  font-size: 11px; color: var(--ink-soft);
+}
+
+/* ── FOOTER ── */
+footer {
+  background: var(--teal-dark);
+  padding: 48px 72px;
+}
+.footer-inner {
+  max-width: 960px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 20px;
+}
+.footer-logo {
+  font-family: var(--serif); font-size: 20px;
+  font-weight: 600; color: #fff; letter-spacing: .1em;
+}
+.footer-logo span { color: var(--gold); }
+.footer-tagline {
+  font-size: 12px; color: rgba(255,255,255,.35);
+  margin-top: 4px; font-style: italic;
+  font-family: var(--serif);
+}
+.footer-links {
+  display: flex; gap: 24px;
+  font-size: 11px; color: rgba(255,255,255,.35);
+}
+.footer-links a { color: inherit; text-decoration: none; }
+.footer-links a:hover { color: rgba(255,255,255,.7); }
+.footer-copy {
+  font-size: 11px; color: rgba(255,255,255,.25);
+}
+
+/* ── DISCLAIMER ── */
+.disclaimer {
+  background: #f0f0ec;
+  padding: 20px 72px;
+  font-size: 11px; color: #888; line-height: 1.6; text-align: center;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.reveal {
+  opacity: 0; transform: translateY(24px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .nav { padding: 16px 24px; }
+  .nav-links { display: none; }
+  .hero { grid-template-columns: 1fr; }
+  .hero-left { padding: 60px 32px; }
+  .hero-h1 { font-size: 38px; }
+  .hero-right { display: none; }
+  .pain, .features, .philosophy, .plans, .trust, .cta-section {
+    padding: 64px 28px;
+  }
+  .pain-grid, .feat-grid, .phil-grid, .plans-grid {
+    grid-template-columns: 1fr;
+  }
+  .feat-card.wide { grid-column: span 1; }
+  .trust-grid { grid-template-columns: repeat(2,1fr); }
+  .compliance { padding: 36px 28px; }
+  .compliance-inner { flex-direction: column; align-items: flex-start; }
+  .compliance-badges { margin-left: 0; }
+  footer { padding: 40px 28px; }
+  .disclaimer { padding: 16px 28px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-logo">SERE<span>NOVA</span></div>
+  <ul class="nav-links">
+    <li><a href="#features">サービス</a></li>
+    <li><a href="#philosophy">投資哲学</a></li>
+    <li><a href="#plans">料金</a></li>
+    <li><a href="#cta">ブログ</a></li>
+  </ul>
+  <button class="nav-btn" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">無料で始める →</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Serenova — Lifeshift Compass</p>
+    <h1 class="hero-h1">退職後のお金、<br><em>誰に相談</em><br>していますか？</h1>
+    <p class="hero-sub">銀行・証券会社は、あなたではなく自社の利益を優先します。セレノバは完全独立・手数料ゼロ。顧客の利益だけを考えるライフサイクル・アドバイザーです。</p>
+    <div class="hero-btns">
+      <a href="#cta" class="btn-gold">無料メルマガを受け取る</a>
+      <a href="#features" class="btn-outline">サービスを見る</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <p class="signals-label">今週の投資トリガー信号</p>
+    <div class="signal-card">
+      <div class="signal-head">
+        <div class="signal-dot dot-green"></div>
+        <span class="signal-name">金（先物）</span>
+        <span class="signal-badge bg-green">強い買いトリガー</span>
+      </div>
+      <p class="signal-body"><strong>エビデンス：</strong>ドル安トレンド継続・地政学リスクの長期化・過去3年比で割高感なし。ハゲタカの金ロング積み増しを確認。予測市場でドル安継続71%。</p>
+    </div>
+    <div class="signal-card">
+      <div class="signal-head">
+        <div class="signal-dot dot-green"></div>
+        <span class="signal-name">米国長期債券</span>
+        <span class="signal-badge bg-green">強い買いトリガー</span>
+      </div>
+      <p class="signal-body"><strong>エビデンス：</strong>FRB利上げサイクル終了確定。10年債利回り4.5%超は過去10年で最高水準。利下げ開始確率78%。退職者の安定収入源として最適タイミング。</p>
+    </div>
+    <div class="signal-card">
+      <div class="signal-head">
+        <div class="signal-dot dot-amber"></div>
+        <span class="signal-name">FX ドル円</span>
+        <span class="signal-badge bg-amber">見送り</span>
+      </div>
+      <p class="signal-body"><strong>エビデンス：</strong>日銀追加利上げ観測67%。円高転換リスク高く現時点での参入は非推奨。次のシグナルを待つ段階。</p>
+    </div>
+    <p class="signal-footer">※ 毎週更新。会員限定で全資産クラスのシグナルをお届けします。</p>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-item"><span>S&P500</span>市場動向を毎日分析</span>
+    <span class="ticker-item"><span>為替</span>ドル円・ユーロ円</span>
+    <span class="ticker-item"><span>原油</span>WTI・ブレント</span>
+    <span class="ticker-item"><span>予測市場</span>Polymarket動向</span>
+    <span class="ticker-item"><span>ハゲタカ</span>空売り残高・信用倍率</span>
+    <span class="ticker-item"><span>地政学</span>リスク分析</span>
+    <span class="ticker-item"><span>NISA</span>中立情報を提供</span>
+    <span class="ticker-item"><span>完全独立</span>手数料ゼロ</span>
+    <!-- repeat for seamless loop -->
+    <span class="ticker-item"><span>S&P500</span>市場動向を毎日分析</span>
+    <span class="ticker-item"><span>為替</span>ドル円・ユーロ円</span>
+    <span class="ticker-item"><span>原油</span>WTI・ブレント</span>
+    <span class="ticker-item"><span>予測市場</span>Polymarket動向</span>
+    <span class="ticker-item"><span>ハゲタカ</span>空売り残高・信用倍率</span>
+    <span class="ticker-item"><span>地政学</span>リスク分析</span>
+    <span class="ticker-item"><span>NISA</span>中立情報を提供</span>
+    <span class="ticker-item"><span>完全独立</span>手数料ゼロ</span>
+  </div>
+</div>
+
+<!-- PAIN -->
+<section class="pain">
+  <p class="section-eyebrow reveal">あなたは大丈夫ですか</p>
+  <h2 class="section-title reveal">退職後に多くの人が<br><em>陥る3つの落とし穴</em></h2>
+  <p class="section-sub reveal">仕事一筋だったあなたに、誰も教えてくれなかった現実があります。</p>
+  <div class="pain-grid">
+    <div class="pain-card reveal">
+      <div class="pain-num">01</div>
+      <div class="pain-title">相談相手がいない孤独</div>
+      <p class="pain-desc">退職後1〜2年で「誰に相談すればいいかわからない」という孤立感に直面します。同僚はいなくなり、お金の話を気軽にできる相手もいない。</p>
+    </div>
+    <div class="pain-card reveal">
+      <div class="pain-num">02</div>
+      <div class="pain-title">金融機関の構造的な利益相反</div>
+      <p class="pain-desc">銀行・証券会社は自分たちが儲かる投資を勧めます。担当者自身は投資経験ゼロ。大切な退職金が彼らの手数料に消えていきます。</p>
+    </div>
+    <div class="pain-card reveal">
+      <div class="pain-num">03</div>
+      <div class="pain-title">NISAを始めたが何を買えばいい？</div>
+      <p class="pain-desc">政府がNISAを推奨しているが、「何を買えばいいか」の中立的な情報がない。結局また証券会社の言いなりになってしまう。</p>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features" id="features">
+  <div class="features-inner">
+    <div class="features-header">
+      <p class="section-eyebrow reveal">セレノバができること</p>
+      <h2 class="section-title reveal">今まで見たことのない<br><em>ライフサイクル・アドバイザー</em></h2>
+    </div>
+    <div class="feat-grid">
+      <div class="feat-card reveal">
+        <div class="feat-num">01</div>
+        <div class="feat-title">リアルタイム投資トリガー信号</div>
+        <p class="feat-desc">世界の株価・為替・原油・金・政変情報をAIが毎日収集・分析。「今は買い時か・待ちか」をエビデンス付きで毎週お届けします。</p>
+        <div class="feat-tags"><span class="feat-tag">AIエージェント</span><span class="feat-tag">週次レポート</span></div>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-num">02</div>
+        <div class="feat-title">ハゲタカ軍団の動きを追う</div>
+        <p class="feat-desc">空売り残高・信用倍率・機関投資家の13F開示を分析。大口が仕込んでいる局面を逆利用する情報を提供します。</p>
+        <div class="feat-tags"><span class="feat-tag">信用情報分析</span><span class="feat-tag">逆張り戦略</span></div>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-num">03</div>
+        <div class="feat-title">企業分析レポート（SWOT・VRIO・財務）</div>
+        <p class="feat-desc">投資候補企業を3つのフレームで徹底分析。専門知識不要で「これはいい！」と直感できるスマートなレポートを提供します。</p>
+        <div class="feat-tags"><span class="feat-tag">SWOT</span><span class="feat-tag">VRIO</span><span class="feat-tag">財務分析</span></div>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-num">04</div>
+        <div class="feat-title">世界の予測市場（賭けサイト）動向</div>
+        <p class="feat-desc">Polymarket等の予測市場からベスト5のイシューを取得。「なぜその方向に賭けが集まるか」を解説する機関投資家も注目の先行指標です。</p>
+        <div class="feat-tags"><span class="feat-tag">予測市場</span><span class="feat-tag">地政学分析</span></div>
+      </div>
+      <div class="feat-card wide reveal">
+        <div class="feat-num">05</div>
+        <div class="feat-title">資金規模別・投資先ガイド（9カテゴリー）</div>
+        <p class="feat-desc">1万円以下の端株ドルコスト平均法から、100万円超の高配当株集中投資まで。あなたの資金規模と経験レベルに合わせた最適な投資先をガイドします。米国株・日本株・REIT・投資信託・先物・FXまで網羅。最終的な投資判断はご自身の責任で行ってください。</p>
+        <div class="feat-tags"><span class="feat-tag">初心者対応</span><span class="feat-tag">9カテゴリー</span><span class="feat-tag">ドルコスト平均法</span><span class="feat-tag">高配当株</span><span class="feat-tag">NISA活用</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section class="philosophy" id="philosophy">
+  <div class="phil-inner">
+    <div class="phil-header reveal">
+      <p class="phil-eyebrow">セレノバの投資哲学</p>
+      <h2 class="phil-title">動じない投資家に<br><em>なるための3原則</em></h2>
+    </div>
+    <div class="phil-grid">
+      <div class="phil-item reveal">
+        <p class="phil-step">原則 01</p>
+        <h3 class="phil-item-title">資産形成の目的は「人生の安心」である</h3>
+        <p class="phil-item-desc">お金を増やすことが目的ではなく、人生の各ステージで安心して生きられる土台をつくること。リスク許容度・年齢・生活スタイルは人それぞれ。自分の軸を持つことが最も重要。</p>
+      </div>
+      <div class="phil-item reveal">
+        <p class="phil-step">原則 02</p>
+        <h3 class="phil-item-title">市場を読む眼を育てる</h3>
+        <p class="phil-item-desc">感情ではなく客観的なシグナルで動く力を育てる。恐怖や焦りに動かされず、データと過去事例を照合しながら自ら判断できる投資家マインドを醸成する。</p>
+      </div>
+      <div class="phil-item reveal">
+        <p class="phil-step">原則 03</p>
+        <h3 class="phil-item-title">長期視点と精神的余裕</h3>
+        <p class="phil-item-desc">5年・10年の長期視点で資産の土台をつくる。配当・分配金などのインカムゲインを活用しながら、含み損局面でも冷静な判断を維持できる精神的余裕を育てる。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPLIANCE -->
+<div class="compliance">
+  <div class="compliance-inner">
+    <div class="compliance-icon">⚖️</div>
+    <div class="compliance-text">
+      <h3>金融商品取引法 完全適合設計</h3>
+      <p>関東財務局への直接確認および牛島総合法律事務所コラム（2025年4月）を根拠に、投資助言業ではなく金融教育・情報提供事業として適法に運営します。特定銘柄への売買指示は一切行いません。</p>
+    </div>
+    <div class="compliance-badges">
+      <span class="badge">完全独立</span>
+      <span class="badge">手数料ゼロ</span>
+      <span class="badge">法令適合</span>
+    </div>
+  </div>
+</div>
+
+<!-- PLANS -->
+<section class="plans" id="plans">
+  <div class="plans-inner">
+    <div class="plans-header">
+      <p class="section-eyebrow reveal">料金プラン</p>
+      <h2 class="section-title reveal">完全独立・<em>手数料ゼロ</em>の透明な料金</h2>
+      <p class="section-sub reveal">銀行・証券会社への手数料は一切なし。あなたが払う料金は、あなたのためだけに使われます。</p>
+    </div>
+    <div class="plans-grid">
+      <div class="plan-card reveal">
+        <div class="plan-name">Light</div>
+        <div class="plan-price">¥1,980</div>
+        <div class="plan-per">/ 月額（税込）</div>
+        <ul class="plan-feats">
+          <li>週次マーケットレポート</li>
+          <li>投資トリガー信号（全資産クラス）</li>
+          <li>会員コミュニティ参加</li>
+          <li>ハゲタカ動向・予測市場サマリー</li>
+        </ul>
+        <button class="plan-btn" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">このプランで始める</button>
+      </div>
+      <div class="plan-card featured reveal">
+        <div class="plan-popular">最も人気</div>
+        <div class="plan-name">Standard</div>
+        <div class="plan-price">¥4,980</div>
+        <div class="plan-per">/ 月額（税込）</div>
+        <ul class="plan-feats">
+          <li>ライトプランのすべて</li>
+          <li>企業分析レポート 月3社分</li>
+          <li>資金規模別投資先ガイド</li>
+          <li>投資トリガー詳細エビデンス</li>
+          <li>過去事例照合レポート</li>
+        </ul>
+        <button class="plan-btn" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">このプランで始める</button>
+      </div>
+      <div class="plan-card reveal">
+        <div class="plan-name">Premium</div>
+        <div class="plan-price">¥9,800</div>
+        <div class="plan-per">/ 月額（税込）</div>
+        <ul class="plan-feats">
+          <li>スタンダードのすべて</li>
+          <li>1on1オンライン相談 月1回</li>
+          <li>個人ライフプランシミュレーション</li>
+          <li>ポートフォリオ構築サポート</li>
+          <li>優先メール相談</li>
+        </ul>
+        <button class="plan-btn" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">このプランで始める</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST -->
+<section class="trust">
+  <div class="trust-inner">
+    <p class="section-eyebrow reveal">数字で見るセレノバ</p>
+    <h2 class="section-title reveal">事業の<em>準備実績</em></h2>
+    <div class="trust-grid">
+      <div class="trust-item reveal">
+        <div class="trust-num">785</div>
+        <div class="trust-label">事業計画書の段落数<br>法令適合・全8章</div>
+      </div>
+      <div class="trust-item reveal">
+        <div class="trust-num">0円</div>
+        <div class="trust-label">金融機関からの<br>手数料・販売奨励金</div>
+      </div>
+      <div class="trust-item reveal">
+        <div class="trust-num">9種</div>
+        <div class="trust-label">対応する<br>投資カテゴリー</div>
+      </div>
+      <div class="trust-item reveal">
+        <div class="trust-num">毎週</div>
+        <div class="trust-label">AIが更新する<br>市場レポート</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="cta">
+  <h2 class="cta-title reveal">まず、無料で<br><em>情報を受け取ってください。</em></h2>
+  <p class="cta-sub reveal">毎週のマーケットサマリーと投資トリガー信号のダイジェスト版を無料でお届けします。いつでも解除できます。</p>
+  <div class="cta-form reveal">
+    <input class="cta-input" type="email" placeholder="メールアドレスを入力">
+    <button class="btn-teal">無料で登録する</button>
+  </div>
+  <p class="cta-note reveal">登録無料・スパムなし・いつでも解除可能</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">SERE<span>NOVA</span></div>
+      <div class="footer-tagline">Lifelong Wealth Navigation for a Fearless Retirement</div>
+    </div>
+    <div class="footer-links">
+      <a href="#">プライバシーポリシー</a>
+      <a href="#">利用規約</a>
+      <a href="#">特定商取引法に基づく表記</a>
+      <a href="#">お問い合わせ</a>
+    </div>
+    <div class="footer-copy">© 2025 Serenova 金融教育ラボ</div>
+  </div>
+</footer>
+
+<!-- DISCLAIMER -->
+<div class="disclaimer">
+  本サービスは金融教育・情報提供を目的としています。特定の金融商品への投資を勧誘・推奨するものではありません。投資に関するすべての判断は、利用者ご自身の責任において行ってください。セレノバ金融教育ラボは投資助言業者ではありません。
+</div>
+
+<script>
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Nav scroll effect
+window.addEventListener('scroll', () => {
+  const nav = document.querySelector('.nav');
+  if (window.scrollY > 40) {
+    nav.style.boxShadow = '0 2px 20px rgba(0,0,0,.08)';
+  } else {
+    nav.style.boxShadow = 'none';
+  }
+});
+</script>
+</body>
+</html>
