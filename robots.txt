@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://noborusun.github.io/SERENOVA-lab.jp/sitemap.xml
