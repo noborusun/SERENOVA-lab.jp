@@ -1061,11 +1061,41 @@ footer {
   <h2 class="cta-title reveal">まず、無料で<br><em>情報を受け取ってください。</em></h2>
   <p class="cta-sub reveal">毎週のマーケットサマリーと投資トリガー信号のダイジェスト版を無料でお届けします。いつでも解除できます。</p>
   <div class="cta-form reveal">
-    <input class="cta-input" type="email" placeholder="メールアドレスを入力">
-    <button class="btn-teal">無料で登録する</button>
+    <form
+      id="cta-form"
+      action="https://docs.google.com/forms/d/e/1FAIpQLSc9CL0fp3mEiCN0OpXQWG8SAaWMkgqCnzNUe5Z7g885Swig3g/formResponse"
+      method="POST"
+      target="hidden_iframe"
+      onsubmit="showThanks()"
+    >
+      <input
+        class="cta-input"
+        type="email"
+        name="entry.657204299"
+        placeholder="メールアドレスを入力"
+        required
+      >
+      <button class="btn-teal" type="submit">無料で登録する</button>
+    </form>
+    <iframe name="hidden_iframe" style="display:none;"></iframe>
+    <p id="cta-thanks" style="display:none; color:var(--teal); font-size:14px; font-weight:500; margin-top:12px; text-align:center;">
+      ご登録ありがとうございます！7月の配信開始をお楽しみに。
+    </p>
   </div>
   <p class="cta-note reveal">登録無料・スパムなし・いつでも解除可能</p>
+  <p style="font-size:11px; color:var(--ink-soft); margin-top:16px;">
+    ※ 2026年7月の正式オープンに合わせて配信開始予定です。しばらくお待ちください。
+  </p>
 </section>
+
+<script>
+function showThanks() {
+  setTimeout(function() {
+    document.getElementById('cta-thanks').style.display = 'block';
+    document.getElementById('cta-form').style.display = 'none';
+  }, 600);
+}
+</script>
 
 <!-- BLOG -->
 <section class="blog" id="blog">
