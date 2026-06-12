@@ -1095,8 +1095,15 @@ footer {
   <h2 class="cta-title reveal">まず、無料で<br><em>情報を受け取ってください。</em></h2>
   <p class="cta-sub reveal">毎週のマーケットサマリーと投資トリガー信号のダイジェスト版を無料でお届けします。いつでも解除できます。</p>
   <div class="cta-form reveal">
-    <input class="cta-input" type="email" placeholder="メールアドレスを入力">
-    <button class="btn-teal">無料で登録する</button>
+    <input class="cta-input" type="email" id="cta-email" placeholder="メールアドレスを入力">
+    <button class="btn-teal" onclick="
+      var email = document.getElementById('cta-email').value;
+      if(email && email.includes('@')){
+        window.open('https://docs.google.com/forms/d/e/1FAIpQLSexampleformid/viewform?usp=pp_url&entry.123456789=' + encodeURIComponent(email), '_blank');
+      } else {
+        alert('メールアドレスを入力してください');
+      }
+    ">無料で登録する</button>
   </div>
   <p class="cta-note reveal">登録無料・スパムなし・いつでも解除可能</p>
 </section>
@@ -1180,6 +1187,10 @@ footer {
           </div>
         </div>
       </a>
+
+      <a href="https://note.com/hip_donkey570/n/ndaf8af1cd19f" target="_blank" rel="noopener" class="blog-card reveal">
+        <div class="blog-card-thumb pickup" style="background:linear-gradient(135deg,#3d1a1a,#280d0d)">
+          <span class="blog-card-thumb-label">NISAシリーズ 第3回</span>
         </div>
         <div class="blog-card-body">
           <div class="blog-card-tag">NISA · 商品選び</div>
@@ -1327,7 +1338,7 @@ footer {
       <a href="https://www.tiktok.com/@kashisho3" target="_blank" rel="noopener">TikTok</a>
       <a href="#">お問い合わせ</a>
     </div>
-    <div class="footer-copy">© 2025 Serenova 金融教育ラボ</div>
+    <div class="footer-copy">© 2026 Serenova 金融教育ラボ</div>
   </div>
 </footer>
 
