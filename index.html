@@ -195,6 +195,49 @@ body {
   transition: transform .2s, box-shadow .2s;
 }
 .signal-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.06); }
+
+/* 世論チャート */
+.opinion-section {
+  background: var(--cream); padding: 56px 24px;
+}
+.opinion-inner { max-width: 720px; margin: 0 auto; }
+.opinion-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px; flex-wrap: wrap; gap: 8px; }
+.opinion-title { font-family: var(--serif); font-size: 26px; color: var(--teal-dark); font-style: italic; }
+.opinion-date { font-size: 12px; color: var(--ink-soft); }
+.opinion-card { background: var(--white); border: 0.5px solid var(--cream-dark); border-radius: 10px; padding: 24px 26px; }
+.opinion-row { margin-bottom: 18px; }
+.opinion-row:last-of-type { margin-bottom: 12px; }
+.opinion-row-top { display: flex; justify-content: space-between; font-size: 13.5px; color: var(--ink-mid); margin-bottom: 7px; }
+.opinion-pct { font-weight: 700; color: var(--teal); }
+.opinion-delta-up { color: var(--teal-mid); font-size: 11px; margin-left: 4px; }
+.opinion-delta-down { color: #993c1d; font-size: 11px; margin-left: 4px; }
+.opinion-bar-track { background: var(--cream-dark); height: 7px; border-radius: 4px; overflow: hidden; }
+.opinion-bar-fill { background: var(--teal); height: 100%; border-radius: 4px; }
+.opinion-bonus { display: flex; justify-content: space-between; font-size: 13.5px; padding-top: 6px; }
+.opinion-bonus-label { color: var(--gold); }
+.opinion-bonus-value { color: var(--gold); font-weight: 700; }
+.opinion-footnote { margin-top: 16px; padding-top: 14px; border-top: 0.5px solid var(--cream-dark); font-size: 11.5px; color: var(--ink-soft); }
+
+/* 登録者数バッジ */
+.cta-reg-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(253,246,233,0.12); padding: 7px 16px; border-radius: 20px;
+  margin: 4px 0 18px;
+}
+.cta-reg-dot { width: 7px; height: 7px; background: var(--gold-light); border-radius: 50%; display: inline-block; }
+.cta-reg-text { color: var(--gold-light); font-size: 13px; font-weight: 500; }
+
+/* 人気記事ランキング */
+.blog-ranking { max-width: 720px; margin: 0 auto 48px; }
+.blog-ranking-title { font-family: var(--serif); font-size: 22px; color: var(--teal-dark); font-style: italic; margin-bottom: 16px; }
+.blog-ranking-card { background: var(--white); border: 0.5px solid var(--cream-dark); border-radius: 10px; padding: 8px 26px; }
+.blog-rank-row { display: flex; align-items: center; gap: 16px; padding: 14px 0; border-bottom: 0.5px solid var(--cream-dark); }
+.blog-rank-row:last-child { border-bottom: none; }
+.blog-rank-num { font-family: var(--serif); font-size: 24px; font-weight: 600; min-width: 28px; color: var(--cream-dark); }
+.blog-rank-num.gold { color: var(--gold); }
+.blog-rank-title { font-size: 14.5px; color: var(--ink); margin-bottom: 3px; }
+.blog-rank-meta { font-size: 11.5px; color: var(--ink-soft); }
+
 .signal-head {
   display: flex; align-items: center; gap: 10px; margin-bottom: 8px;
 }
@@ -880,6 +923,37 @@ footer {
   </div>
 </section>
 
+<!-- OPINION CHART -->
+<section class="opinion-section">
+  <div class="opinion-inner reveal">
+    <div class="opinion-header">
+      <p class="opinion-title">今週の世論チャート</p>
+      <p class="opinion-date">2026年6月29日更新</p>
+    </div>
+    <div class="opinion-card">
+      <div class="opinion-row">
+        <div class="opinion-row-top">
+          <span>米イラン 恒久和平合意（年内）</span>
+          <span><span class="opinion-pct">72%</span><span class="opinion-delta-up">▲7pt</span></span>
+        </div>
+        <div class="opinion-bar-track"><div class="opinion-bar-fill" style="width:72%"></div></div>
+      </div>
+      <div class="opinion-row">
+        <div class="opinion-row-top">
+          <span>ロシア×ウクライナ 年内停戦</span>
+          <span><span class="opinion-pct">27%</span><span class="opinion-delta-down">▼3pt</span></span>
+        </div>
+        <div class="opinion-bar-track"><div class="opinion-bar-fill" style="width:27%"></div></div>
+      </div>
+      <div class="opinion-bonus">
+        <span class="opinion-bonus-label">おまけ：サッカーW杯優勝オッズ1位</span>
+        <span class="opinion-bonus-value">ブラジル 23%</span>
+      </div>
+      <p class="opinion-footnote">データ出典：Polymarket／Kalshi（予測市場）の取引価格を基にした市場参加者の期待値です。投資助言ではなく、世論・市場心理の参考情報としてご覧ください。</p>
+    </div>
+  </div>
+</section>
+
 <!-- TICKER -->
 <div class="ticker">
   <div class="ticker-inner">
@@ -1094,6 +1168,12 @@ footer {
 <section class="cta-section" id="cta">
   <h2 class="cta-title reveal">まず、無料で<br><em>情報を受け取ってください。</em></h2>
   <p class="cta-sub reveal">毎週のマーケットサマリーと投資トリガー信号のダイジェスト版を無料でお届けします。いつでも解除できます。</p>
+  <div class="reveal" style="text-align:center;">
+    <span class="cta-reg-badge">
+      <span class="cta-reg-dot"></span>
+      <span class="cta-reg-text" id="cta-reg-count">現在 17名が登録中</span>
+    </span>
+  </div>
   <div class="cta-form reveal">
     <input class="cta-input" type="email" id="cta-email" placeholder="メールアドレスを入力">
     <button class="btn-teal" onclick="
@@ -1116,6 +1196,40 @@ footer {
       <h2 class="section-title reveal">銀行が教えない<br><em>本音のコンテンツ</em></h2>
       <p class="section-sub reveal">証券会社・銀行が絶対に言わない金融の真実を、完全独立の立場から発信しています。毎週更新。noteマネー編集部に<strong>6本連続ピックアップ</strong>されました。</p>
     </div>
+
+    <div class="blog-ranking reveal">
+      <p class="blog-ranking-title">読まれている記事 TOP3</p>
+      <div class="blog-ranking-card">
+        <a href="https://note.com/hip_donkey570/n/n56e8e3409756" target="_blank" rel="noopener" style="text-decoration:none;">
+          <div class="blog-rank-row">
+            <div class="blog-rank-num gold">1</div>
+            <div>
+              <div class="blog-rank-title">お金持ちが今、こっそり動いている話。</div>
+              <div class="blog-rank-meta">54 views · スキ3</div>
+            </div>
+          </div>
+        </a>
+        <a href="https://note.com/hip_donkey570/n/n33afeffe9923" target="_blank" rel="noopener" style="text-decoration:none;">
+          <div class="blog-rank-row">
+            <div class="blog-rank-num">2</div>
+            <div>
+              <div class="blog-rank-title">NISAを始めたあなたへ。証券会社が絶対言わない5つのこと</div>
+              <div class="blog-rank-meta">21 views · スキ3</div>
+            </div>
+          </div>
+        </a>
+        <a href="https://note.com/hip_donkey570/n/n936f1c8b1c6c" target="_blank" rel="noopener" style="text-decoration:none;">
+          <div class="blog-rank-row">
+            <div class="blog-rank-num">3</div>
+            <div>
+              <div class="blog-rank-title">つみたてNISAと成長投資枠、どう使い分けるか</div>
+              <div class="blog-rank-meta">18 views · スキ4</div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
     <div class="blog-grid">
 
       <a href="https://note.com/hip_donkey570/n/n33afeffe9923" target="_blank" rel="noopener" class="blog-card reveal">
