@@ -218,6 +218,24 @@ body {
 .opinion-bonus-value { color: var(--gold); font-weight: 700; }
 .opinion-footnote { margin-top: 16px; padding-top: 14px; border-top: 0.5px solid var(--cream-dark); font-size: 11.5px; color: var(--ink-soft); }
 
+/* ブログ最新記事（世論チャートと同トーン） */
+.blogupdate-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 14px; flex-wrap: wrap; gap: 8px; }
+.blogupdate-title { font-family: var(--serif); font-size: 26px; color: var(--teal-dark); font-style: italic; }
+.blogupdate-date { font-size: 12px; color: var(--ink-soft); }
+.blogupdate-link {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  text-decoration: none; padding: 16px 20px;
+  border: 0.5px solid var(--cream-dark); border-radius: 10px; background: var(--white);
+  margin-bottom: 34px; transition: box-shadow .2s, transform .2s;
+}
+.blogupdate-link:hover { box-shadow: 0 8px 24px rgba(0,0,0,.06); transform: translateY(-2px); }
+.blogupdate-series {
+  font-size: 11px; font-weight: 700; color: var(--teal); background: var(--teal-light);
+  padding: 3px 10px; border-radius: 12px; white-space: nowrap;
+}
+.blogupdate-name { font-size: 14px; color: var(--ink-mid); font-weight: 600; }
+.blogupdate-arrow { margin-left: auto; color: var(--teal); font-size: 14px; }
+
 /* 登録者数バッジ */
 .cta-reg-badge {
   display: inline-flex; align-items: center; gap: 8px;
@@ -926,31 +944,41 @@ footer {
 <!-- OPINION CHART -->
 <section class="opinion-section">
   <div class="opinion-inner reveal">
+    <div class="blogupdate-header">
+      <p class="blogupdate-title">📝 ブログ最新記事</p>
+      <p class="blogupdate-date">2026年8月7日更新</p>
+    </div>
+    <a href="https://note.com/hip_donkey570/n/n8994fc55feb4" target="_blank" rel="noopener" class="blogupdate-link">
+      <span class="blogupdate-series">税金シリーズ 第3回</span>
+      <span class="blogupdate-name">相続税、うちは関係ないと思っていたら——東京・神奈川・埼玉・千葉、"普通の家"のシミュレーション</span>
+      <span class="blogupdate-arrow">→</span>
+    </a>
+
     <div class="opinion-header">
       <p class="opinion-title">🌍 今週の世論チャート</p>
-      <p class="opinion-date">2026年7月29日更新</p>
+      <p class="opinion-date">2026年8月7日更新</p>
     </div>
     <div class="opinion-card">
       <div class="opinion-row">
         <div class="opinion-row-top">
-          <span>🕊️ 米イラン 最終核合意（7月31日まで）</span>
-          <span><span class="opinion-pct">56%</span><span class="opinion-delta-up">▲21pt</span></span>
+          <span>🕊️ 米イラン 恒久的和平合意（年内）</span>
+          <span><span class="opinion-pct">82%</span><span class="opinion-delta-up">※期限切替後の新規値</span></span>
         </div>
-        <div class="opinion-bar-track"><div class="opinion-bar-fill" style="width:56%"></div></div>
+        <div class="opinion-bar-track"><div class="opinion-bar-fill" style="width:82%"></div></div>
       </div>
       <div class="opinion-row">
         <div class="opinion-row-top">
           <span>🛡️ ロシア×ウクライナ 年内停戦（12月31日まで）</span>
-          <span><span class="opinion-pct">44%</span><span class="opinion-delta-up">▲5pt</span></span>
+          <span><span class="opinion-pct">35%</span><span class="opinion-delta-down">▼9pt</span></span>
         </div>
-        <div class="opinion-bar-track"><div class="opinion-bar-fill" style="width:44%"></div></div>
+        <div class="opinion-bar-track"><div class="opinion-bar-fill" style="width:35%"></div></div>
       </div>
       <div class="opinion-row">
         <div class="opinion-row-top">
           <span>💰 FRB 2026年利下げゼロ回の確率</span>
-          <span><span class="opinion-pct">84%</span><span class="opinion-delta-up">▲4pt</span></span>
+          <span><span class="opinion-pct">89%</span><span class="opinion-delta-up">▲5pt</span></span>
         </div>
-        <div class="opinion-bar-track"><div class="opinion-bar-fill" style="width:84%"></div></div>
+        <div class="opinion-bar-track"><div class="opinion-bar-fill" style="width:89%"></div></div>
       </div>
 
       <p class="opinion-footnote">データ出典：Polymarket／Kalshi（予測市場）の取引価格を基にした市場参加者の期待値です。投資助言ではなく、世論・市場心理の参考情報としてご覧ください。</p>
