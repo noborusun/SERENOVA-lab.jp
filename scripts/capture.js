@@ -1,3 +1,4 @@
+fix:新完了capture.js
 // Polymarket「人気上昇中」ページを 9:16(1080x1920)で撮影するスクリプト
 // 実行: node scripts/capture.js
 
@@ -30,10 +31,12 @@ function formatDate(d) {
   const page = await context.newPage();
 
   console.log(`Opening ${TARGET_URL} ...`);
-  await page.goto(TARGET_URL, { waitUntil: 'networkidle', timeout: 60000 });
+  // Polymarketは価格がリアルタイム更新され続けるため、'networkidle' は
+  // いつまでも満たされずタイムアウトする。'domcontentloaded' に変更する。
+  await page.goto(TARGET_URL, { waitUntil: 'domcontentloaded', timeout: 60000 });
 
-  // マーケットカードが描画されるまで待つ
-  await page.waitForTimeout(4000);
+  // マーケットカードが描画されるまで、少し長めに待つ
+  await page.waitForTimeout(8000);
 
   // ヘッダー〜カード数枚が収まる範囲だけを切り出す(全ページ長尺スクショにしない)
   const filename = `polymarket_${formatDate(new Date())}.png`;
