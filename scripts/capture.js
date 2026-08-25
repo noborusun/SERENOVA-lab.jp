@@ -1,4 +1,4 @@
-fix:新完了capture.js
+
 // Polymarket「人気上昇中」ページを 9:16(1080x1920)で撮影するスクリプト
 // 実行: node scripts/capture.js
 
