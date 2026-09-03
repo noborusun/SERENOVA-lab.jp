@@ -1,0 +1,155 @@
+[
+  {
+    "date": "2026-09-03",
+    "id": "01",
+    "slug": "nikkei225",
+    "label": "日経225(年末終値)",
+    "url": "https://polymarket.com/ja/event/nikkei-225-close-price-end-of-2026",
+    "screenshot": "screenshots/2026-09-03/01_nikkei225.png",
+    "odds": [
+      "27.1%",
+      "20.0%",
+      "16%",
+      "21.6%",
+      "0%",
+      "10%"
+    ],
+    "status": "ok"
+  },
+  {
+    "date": "2026-09-03",
+    "id": "02",
+    "slug": "usdjpy",
+    "label": "USD/JPY(年末終値)",
+    "url": "https://polymarket.com/ja/event/usdjpy-close-price-end-of-2026",
+    "screenshot": "screenshots/2026-09-03/02_usdjpy.png",
+    "odds": [
+      "40%",
+      "20.1%",
+      "17%",
+      "13%",
+      "0%",
+      "15%"
+    ],
+    "status": "ok"
+  },
+  {
+    "date": "2026-09-03",
+    "id": "03",
+    "slug": "wti",
+    "label": "WTI原油",
+    "url": "https://polymarket.com/ja/event/what-price-will-wti-hit-in-august-2026",
+    "screenshot": "screenshots/2026-09-03/03_wti.png",
+    "odds": [
+      "2%",
+      "100%",
+      "100%",
+      "100%",
+      "100%",
+      "100%"
+    ],
+    "status": "ok"
+  },
+  {
+    "date": "2026-09-03",
+    "id": "04",
+    "slug": "gold",
+    "label": "ゴールド(GC)",
+    "url": "https://polymarket.com/ja/event/what-will-gold-gc-hit-by-end-of-december",
+    "screenshot": "screenshots/2026-09-03/04_gold.png",
+    "odds": [
+      "2%",
+      "2%",
+      "3%",
+      "4%",
+      "6%",
+      "12%"
+    ],
+    "status": "ok"
+  },
+  {
+    "date": "2026-09-03",
+    "id": "05",
+    "slug": "spy",
+    "label": "S&P500",
+    "url": "https://polymarket.com/ja/event/what-price-will-spy-hit-in-august-2026",
+    "screenshot": "screenshots/2026-09-03/05_spy.png",
+    "odds": [
+      "13%",
+      "52%",
+      "16%",
+      "86%",
+      "3.7%",
+      "100%"
+    ],
+    "status": "ok"
+  },
+  {
+    "date": "2026-09-03",
+    "id": "06",
+    "slug": "midterms",
+    "label": "2026年中間選挙",
+    "url": "https://polymarket.com/ja/event/balance-of-power-2026-midterms",
+    "screenshot": "screenshots/2026-09-03/06_midterms.png",
+    "odds": [
+      "51%",
+      "36%",
+      "11%",
+      "1%",
+      "0%",
+      "15%"
+    ],
+    "status": "ok"
+  },
+  {
+    "date": "2026-09-03",
+    "id": "07",
+    "slug": "hormuz",
+    "label": "ホルムズ海峡交通",
+    "url": "https://polymarket.com/ja/event/strait-of-hormuz-traffic-returns-to-normal-by-september-30-20260702154339440",
+    "screenshot": "screenshots/2026-09-03/07_hormuz.png",
+    "odds": [
+      "3%",
+      "0%",
+      "15%",
+      "30%",
+      "45%",
+      "60%"
+    ],
+    "status": "ok"
+  },
+  {
+    "date": "2026-09-03",
+    "id": "08",
+    "slug": "iran",
+    "label": "イラン封鎖解除",
+    "url": "https://polymarket.com/ja/event/us-announces-end-of-iranian-blockade-byptptpt-20260713152715080",
+    "screenshot": "screenshots/2026-09-03/08_iran.png",
+    "odds": [
+      "1%",
+      "5%",
+      "11%",
+      "18%",
+      "36%",
+      "61%"
+    ],
+    "status": "ok"
+  },
+  {
+    "date": "2026-09-03",
+    "id": "09",
+    "slug": "fedhike",
+    "label": "FRB利上げ",
+    "url": "https://polymarket.com/ja/event/fed-rate-hike-by",
+    "screenshot": "screenshots/2026-09-03/09_fedhike.png",
+    "odds": [
+      "50%",
+      "65%",
+      "2%",
+      "3.5%",
+      "3.50%",
+      "3.75%"
+    ],
+    "status": "ok"
+  }
+]
