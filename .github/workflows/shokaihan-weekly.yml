@@ -1,1 +1,44 @@
+name: Shokaihan Weekly Intelligence
 
+on:
+  schedule:
+    # 毎週火曜 09:00 JST = UTC火曜 00:00
+    - cron: '0 0 * * 2'
+  workflow_dispatch: {}
+
+jobs:
+  collect-and-analyze:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: |
+          npm init -y
+          npm install playwright
+          npx playwright install --with-deps chromium
+
+      - name: Collect Polymarket data (9 markets)
+        run: node scripts/collect.js
+
+      - name: Analyze and generate report
+        run: node scripts/analyze.js
+
+      - name: Clean up old screenshots (3+ months)
+        run: node scripts/cleanup.js
+
+      - name: Commit and push results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add screenshots/ data/ reports/
+          git diff --staged --quiet || git commit -m "chore: 哨戒班 weekly intelligence $(date +'%Y-%m-%d')"
+          git push
