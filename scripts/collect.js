@@ -2,6 +2,10 @@
 // 毎週火曜9:00(JST)に9つのPolymarketページを巡回し、
 // スクリーンショットと簡易データを収集する。
 //
+// 修正点(2026-10-07): GitHub Actionsのサーバーは米国にあるため、Polymarketが
+// 「米国からアクセスしているようです」というモーダルを表示する。
+// 撮影前にこのモーダルを自動で閉じる処理(dismissGeoModal)を追加。
+//
 // 実行: node scripts/collect.js
 
 const { chromium } = require('playwright');
@@ -48,6 +52,55 @@ function saveHistory(history) {
   fs.writeFileSync(DATA_FILE, JSON.stringify(history, null, 2), 'utf-8');
 }
 
+// 「米国からアクセスしているようです」モーダルを閉じる。
+// 1) 「閲覧専用モードで続行」リンクをクリック(データは背景にそのまま表示される)
+// 2) なければ右上の×ボタン
+// 3) それでも残っていたらEscキー、最後の手段としてDOMからダイアログを取り除く
+// 戻り値: 何かしらの方法でモーダルを処理できたら true
+async function dismissGeoModal(page) {
+  const candidates = [
+    page.getByText('閲覧専用モードで続行'),
+    page.getByRole('button', { name: /閲覧専用モードで続行|view[- ]only/i }),
+    page.locator('[role="dialog"] button[aria-label*="lose" i]'),
+    page.locator('[role="dialog"] button[aria-label*="閉じる"]'),
+  ];
+
+  for (const locator of candidates) {
+    try {
+      const el = locator.first();
+      if (await el.isVisible({ timeout: 1500 })) {
+        await el.click({ timeout: 3000 });
+        await page.waitForTimeout(1000);
+        return true;
+      }
+    } catch (e) {
+      // この候補は見つからなかった。次の候補へ。
+    }
+  }
+
+  // ボタンが見つからなかった場合: Escで閉じる
+  try {
+    const dialog = page.locator('[role="dialog"]').first();
+    if (await dialog.isVisible({ timeout: 1000 })) {
+      await page.keyboard.press('Escape');
+      await page.waitForTimeout(800);
+      if (!(await dialog.isVisible({ timeout: 500 }))) return true;
+
+      // それでも残っていたら、DOMから直接取り除く(撮影専用の最終手段)
+      await page.evaluate(() => {
+        document.querySelectorAll('[role="dialog"]').forEach((el) => el.remove());
+        document.querySelectorAll('[data-state="open"][aria-hidden="true"], .fixed.inset-0').forEach((el) => el.remove());
+        document.body.style.overflow = 'auto';
+      });
+      await page.waitForTimeout(500);
+      return true;
+    }
+  } catch (e) {
+    // ダイアログ自体が無かった
+  }
+  return false;
+}
+
 // ページ内のテキストから「NN%」のような確率表記をざっくり拾う。
 // Polymarketはマーケットごとに表示形式が違う(Yes/No、複数選択肢など)ため、
 // 完全な自動判定はせず、目視確認の手がかりとして最初の数個だけ保存する。
@@ -82,7 +135,14 @@ async function extractOdds(page) {
     console.log(`[${target.id}] Opening ${target.label} ...`);
     try {
       await page.goto(target.url, { waitUntil: 'domcontentloaded', timeout: 60000 });
-      await page.waitForTimeout(6000);
+
+      // モーダルは読み込み後に少し遅れて出ることがあるため、待ってから閉じる
+      await page.waitForTimeout(4000);
+      let modalHandled = await dismissGeoModal(page);
+
+      // さらに待って、遅れて出てきた場合に備えてもう一度チェック
+      await page.waitForTimeout(3000);
+      modalHandled = (await dismissGeoModal(page)) || modalHandled;
 
       const filename = `${target.id}_${target.slug}.png`;
       const outputPath = path.join(dayDir, filename);
@@ -98,9 +158,10 @@ async function extractOdds(page) {
         url: target.url,
         screenshot: path.relative(path.join(__dirname, '..'), outputPath),
         odds, // 賞味期限切れ(イベント終了)のマーケットは、ここが空になりやすい → 3参照の判定に使える
+        modalDismissed: modalHandled,
         status: 'ok',
       });
-      console.log(`  -> saved ${filename}, odds sample: ${odds.join(', ') || '(取得できず)'}`);
+      console.log(`  -> saved ${filename}, modal: ${modalHandled ? 'closed' : 'none'}, odds sample: ${odds.join(', ') || '(取得できず)'}`);
     } catch (e) {
       console.error(`  -> 失敗: ${e.message}`);
       todayRecords.push({
@@ -131,4 +192,3 @@ async function extractOdds(page) {
   console.error(err);
   process.exit(1);
 });
-
