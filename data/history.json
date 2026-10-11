@@ -1258,5 +1258,194 @@
     "watchPct": null,
     "modalDismissed": true,
     "status": "ok"
+  },
+  {
+    "date": "2026-10-11",
+    "id": "01",
+    "slug": "nikkei225",
+    "label": "日経225(年末終値)",
+    "url": "https://polymarket.com/ja/event/nikkei-225-close-price-end-of-2026",
+    "screenshot": "screenshots/2026-10-11/01_nikkei225.png",
+    "odds": [
+      "40.9%",
+      "34%",
+      "19.5%",
+      "19%",
+      "0%",
+      "10%"
+    ],
+    "watchLabel": "75,000-80,000",
+    "watchPct": 31,
+    "ended": false,
+    "modalDismissed": true,
+    "status": "ok"
+  },
+  {
+    "date": "2026-10-11",
+    "id": "02",
+    "slug": "usdjpy",
+    "label": "USD/JPY(年末終値)",
+    "url": "https://polymarket.com/ja/event/usdjpy-close-price-end-of-2026",
+    "screenshot": "screenshots/2026-10-11/02_usdjpy.png",
+    "odds": [
+      "40%",
+      "23%",
+      "11.1%",
+      "11%",
+      "0%",
+      "15%"
+    ],
+    "watchLabel": "150-160",
+    "watchPct": 48,
+    "ended": false,
+    "modalDismissed": true,
+    "status": "ok"
+  },
+  {
+    "date": "2026-10-11",
+    "id": "03",
+    "slug": "wti",
+    "label": "WTI原油(当月)",
+    "url": "https://polymarket.com/ja/event/what-price-will-wti-hit-in-october-2026",
+    "screenshot": "screenshots/2026-10-11/03_wti.png",
+    "odds": [
+      "1%",
+      "1%",
+      "1%",
+      "3%",
+      "6%",
+      "11%"
+    ],
+    "watchLabel": "↑$100",
+    "watchPct": 36,
+    "ended": false,
+    "modalDismissed": true,
+    "status": "ok"
+  },
+  {
+    "date": "2026-10-11",
+    "id": "04",
+    "slug": "gold",
+    "label": "ゴールド(GC・12月末まで)",
+    "url": "https://polymarket.com/ja/event/what-will-gold-gc-hit-by-end-of-december",
+    "screenshot": "screenshots/2026-10-11/04_gold.png",
+    "odds": [
+      "1%",
+      "1%",
+      "2%",
+      "2%",
+      "3%",
+      "5%"
+    ],
+    "watchLabel": "↑$5,000",
+    "watchPct": 22,
+    "ended": false,
+    "modalDismissed": true,
+    "status": "ok"
+  },
+  {
+    "date": "2026-10-11",
+    "id": "05",
+    "slug": "spy",
+    "label": "S&P500(SPY・当月)",
+    "url": "https://polymarket.com/ja/event/what-price-will-spy-hit-in-october-2026",
+    "screenshot": "screenshots/2026-10-11/05_spy.png",
+    "odds": [
+      "4%",
+      "2%",
+      "3%",
+      "11%",
+      "32%",
+      "63%"
+    ],
+    "watchLabel": "↑$800",
+    "watchPct": 32,
+    "ended": false,
+    "modalDismissed": true,
+    "status": "ok"
+  },
+  {
+    "date": "2026-10-11",
+    "id": "06",
+    "slug": "midterms",
+    "label": "2026年中間選挙",
+    "url": "https://polymarket.com/ja/event/balance-of-power-2026-midterms",
+    "screenshot": "screenshots/2026-10-11/06_midterms.png",
+    "odds": [
+      "62%",
+      "29%",
+      "9%",
+      "1%",
+      "0%",
+      "15%"
+    ],
+    "watchLabel": "民主党圧勝",
+    "watchPct": 62,
+    "ended": false,
+    "modalDismissed": true,
+    "status": "ok"
+  },
+  {
+    "date": "2026-10-11",
+    "id": "07",
+    "slug": "hormuz",
+    "label": "ホルムズ海峡(12/31までに正常化)",
+    "url": "https://polymarket.com/ja/event/strait-of-hormuz-traffic-returns-to-normal-by-december-31",
+    "screenshot": "screenshots/2026-10-11/07_hormuz.png",
+    "odds": [
+      "15%",
+      "0%",
+      "25%",
+      "50%",
+      "75%",
+      "100%"
+    ],
+    "watchLabel": "@binary",
+    "watchPct": 15,
+    "ended": false,
+    "modalDismissed": true,
+    "status": "ok"
+  },
+  {
+    "date": "2026-10-11",
+    "id": "08",
+    "slug": "iran",
+    "label": "イラン封鎖解除(12/31まで)",
+    "url": "https://polymarket.com/ja/event/us-announces-end-of-iranian-blockade-byptptpt-20260713152715080",
+    "screenshot": "screenshots/2026-10-11/08_iran.png",
+    "odds": [
+      "4%",
+      "15%",
+      "27%",
+      "44%",
+      "66%",
+      "66%"
+    ],
+    "watchLabel": "12月31日",
+    "watchPct": 44,
+    "ended": false,
+    "modalDismissed": true,
+    "status": "ok"
+  },
+  {
+    "date": "2026-10-11",
+    "id": "09",
+    "slug": "fedhike",
+    "label": "FRB(年内にもう一度利上げ)",
+    "url": "https://polymarket.com/ja/event/another-fed-rate-hike-in-2026",
+    "screenshot": "screenshots/2026-10-11/09_fedhike.png",
+    "odds": [
+      "77%",
+      "40%",
+      "55%",
+      "70%",
+      "85%",
+      "100%"
+    ],
+    "watchLabel": "@binary",
+    "watchPct": 77,
+    "ended": false,
+    "modalDismissed": true,
+    "status": "ok"
   }
 ]
