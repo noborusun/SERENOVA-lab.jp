@@ -8,6 +8,10 @@
 //               実行日の月からURLを自動生成するように変更
 //             ②「基準項目」(例: ↑$90)を指定すると、その項目の確率を
 //               狙い撃ちで取得するように変更(比較の「数値」列に使う)
+// 2026-10-11: ①全9マーケットに基準項目を指定(「ページ内の最大%」は、グラフの縦軸の目盛りや
+//               終了済みの結果を拾う誤りがあったため廃止)
+//             ②ホルムズ海峡・FRBのURLを、終了済みのものから現行マーケットに差し替え
+//             ③マーケットが終了済み(ページ上部に「結果」が出ている)かを自動検知し、記録に残す
 //
 // 実行: node scripts/collect.js
 
@@ -33,16 +37,21 @@ function monthlyUrl(prefix, now) {
 //           ページ内で一番大きい%を仮の代表値にする(精度は低い)
 //           書き方の例: '↑$90' '↑150' '↓$85'(全角・「ドル」表記ゆれは自動で吸収)
 function buildTargets(now) {
+  // watch の書き方:
+  //   '↑$100'          矢印+価格の行(原油・ゴールド・S&P500など。「ドル」「$」の表記ゆれは自動で吸収)
+  //   '75,000-80,000'  区分(レンジ)の行 / '民主党圧勝' '12月31日' のような行の見出し
+  //   '@binary'        「はい/いいえ」だけの単一マーケット(ページ上部の「○○% 確率」を読む)
+  // マーケットが終了すると、ページ上部に「結果」が出る → ended として記録される(URLの差し替え時期の目印)
   return [
-    { id: '01', slug: 'nikkei225', label: '日経225(年末終値)', url: 'https://polymarket.com/ja/event/nikkei-225-close-price-end-of-2026', watch: null },
-    { id: '02', slug: 'usdjpy', label: 'USD/JPY(年末終値)', url: 'https://polymarket.com/ja/event/usdjpy-close-price-end-of-2026', watch: '↑150' },
-    { id: '03', slug: 'wti', label: 'WTI原油', url: monthlyUrl('what-price-will-wti-hit-in', now), watch: '↑$90' },
-    { id: '04', slug: 'gold', label: 'ゴールド(GC)', url: 'https://polymarket.com/ja/event/what-will-gold-gc-hit-by-end-of-december', watch: null },
-    { id: '05', slug: 'spy', label: 'S&P500', url: monthlyUrl('what-price-will-spy-hit-in', now), watch: null },
-    { id: '06', slug: 'midterms', label: '2026年中間選挙', url: 'https://polymarket.com/ja/event/balance-of-power-2026-midterms', watch: null },
-    { id: '07', slug: 'hormuz', label: 'ホルムズ海峡交通', url: 'https://polymarket.com/ja/event/strait-of-hormuz-traffic-returns-to-normal-by-september-30-20260702154339440', watch: null },
-    { id: '08', slug: 'iran', label: 'イラン封鎖解除', url: 'https://polymarket.com/ja/event/us-announces-end-of-iranian-blockade-byptptpt-20260713152715080', watch: null },
-    { id: '09', slug: 'fedhike', label: 'FRB利上げ', url: 'https://polymarket.com/ja/event/fed-rate-hike-by', watch: null },
+    { id: '01', slug: 'nikkei225', label: '日経225(年末終値)', url: 'https://polymarket.com/ja/event/nikkei-225-close-price-end-of-2026', watch: '75,000-80,000' },
+    { id: '02', slug: 'usdjpy', label: 'USD/JPY(年末終値)', url: 'https://polymarket.com/ja/event/usdjpy-close-price-end-of-2026', watch: '150-160' },
+    { id: '03', slug: 'wti', label: 'WTI原油(当月)', url: monthlyUrl('what-price-will-wti-hit-in', now), watch: '↑$100' },
+    { id: '04', slug: 'gold', label: 'ゴールド(GC・12月末まで)', url: 'https://polymarket.com/ja/event/what-will-gold-gc-hit-by-end-of-december', watch: '↑$5,000' },
+    { id: '05', slug: 'spy', label: 'S&P500(SPY・当月)', url: monthlyUrl('what-price-will-spy-hit-in', now), watch: '↑$800' },
+    { id: '06', slug: 'midterms', label: '2026年中間選挙', url: 'https://polymarket.com/ja/event/balance-of-power-2026-midterms', watch: '民主党圧勝' },
+    { id: '07', slug: 'hormuz', label: 'ホルムズ海峡(12/31までに正常化)', url: 'https://polymarket.com/ja/event/strait-of-hormuz-traffic-returns-to-normal-by-december-31', watch: '@binary' },
+    { id: '08', slug: 'iran', label: 'イラン封鎖解除(12/31まで)', url: 'https://polymarket.com/ja/event/us-announces-end-of-iranian-blockade-byptptpt-20260713152715080', watch: '12月31日' },
+    { id: '09', slug: 'fedhike', label: 'FRB(年内にもう一度利上げ)', url: 'https://polymarket.com/ja/event/another-fed-rate-hike-in-2026', watch: '@binary' },
   ];
 }
 
@@ -77,18 +86,30 @@ function parseLabel(s) {
   return { arrow: m[1], value: parseFloat(m[2].replace(/,/g, '')) };
 }
 
-// ページ全文から、基準項目(例: '↑$90')の行を探し、その行の確率(%)を返す。
-// 見つからなければ null。「<1%」は 0.5 として扱う。
-function findWatchPct(text, watchLabel) {
-  const want = parseLabel(watchLabel);
-  if (!want) return null;
+// 行の見出しの表記ゆれを吸収して比べる(全角・空白・$・カンマ・「ドル」を無視)
+function norm(s) {
+  return String(s).normalize('NFKC').replace(/\s+/g, '').replace(/[$,]/g, '').replace(/ドル/g, '');
+}
+
+function lineMatches(line, spec) {
+  if (norm(line) === norm(spec)) return true;
+  // 矢印+数値は、行末にVol.などが続く場合も含めて数値で比べる
+  const a = parseLabel(spec);
+  const b = parseLabel(line);
+  return !!(a && b && a.arrow === b.arrow && a.value === b.value);
+}
+
+// ページ全文から、基準項目(spec)の確率(%)を返す。見つからなければ null。「<1%」は 0.5 として扱う。
+//   spec === '@binary' : ページ上部の「○○% 確率」(「はい」だけの単一マーケット)
+//   それ以外           : spec と一致する行を探し、その少し後ろにある最初の「NN%」
+function findWatchPct(text, spec) {
+  if (spec === '@binary') {
+    const m = String(text).match(/(<)?(\d{1,3}(?:\.\d+)?)\s*%\s*(?:確率|chance)/i);
+    return m ? (m[1] ? 0.5 : parseFloat(m[2])) : null;
+  }
   const lines = String(text).split('\n').map((l) => l.trim()).filter(Boolean);
-
   for (let i = 0; i < lines.length; i++) {
-    const got = parseLabel(lines[i]);
-    if (!got || got.arrow !== want.arrow || got.value !== want.value) continue;
-
-    // この行の少し後ろにある、最初の「NN%」がこの項目の確率
+    if (!lineMatches(lines[i], spec)) continue;
     for (let j = i + 1; j < Math.min(i + 9, lines.length); j++) {
       const n = lines[j].normalize('NFKC').replace(/\s+/g, '');
       if (/^[↑↓]/.test(n)) break; // 次の選択肢の行に入ったので打ち切り
@@ -97,6 +118,11 @@ function findWatchPct(text, watchLabel) {
     }
   }
   return null;
+}
+
+// マーケットが終了済みか: ページ上部に「Outcome: ○○」「最終結果」が表示されていれば終了済み
+function isEnded(text) {
+  return /Outcome:|最終結果|提案された結果/.test(String(text).slice(0, 3000));
 }
 
 // ページ内のテキストから「NN%」を拾う(基準項目を指定していないマーケット用の予備)
@@ -188,7 +214,8 @@ async function main() {
 
       const text = await page.evaluate(() => document.body.innerText).catch(() => '');
       const odds = extractOdds(text);
-      const watchPct = target.watch ? findWatchPct(text, target.watch) : null;
+      const ended = isEnded(text);
+      const watchPct = (target.watch && !ended) ? findWatchPct(text, target.watch) : null; // 終了済みの結果は採用しない
 
       todayRecords.push({
         date: dateStr,
@@ -199,12 +226,13 @@ async function main() {
         screenshot: path.relative(path.join(__dirname, '..'), outputPath),
         odds,
         watchLabel: target.watch || null,
-        watchPct, // 基準項目の確率(%)。見つからなければ null
+        watchPct, // 基準項目の確率(%)。見つからない・終了済みなら null
+        ended,    // true = マーケット終了済み(URLの差し替えが必要)
         modalDismissed: modalHandled,
         status: 'ok',
       });
       console.log(`  -> saved ${filename}, modal: ${modalHandled ? 'closed' : 'none'}, ` +
-        (target.watch ? `watch ${target.watch} = ${watchPct === null ? '(見つからず)' : watchPct + '%'}` : `odds sample: ${odds.join(', ') || '(取得できず)'}`));
+        (ended ? '★マーケット終了済み(URL要更新)' : `watch ${target.watch} = ${watchPct === null ? '(見つからず)' : watchPct + '%'}`));
     } catch (e) {
       console.error(`  -> 失敗: ${e.message}`);
       todayRecords.push({
@@ -241,4 +269,4 @@ if (require.main === module) {
   });
 }
 
-module.exports = { parseLabel, findWatchPct, extractOdds, monthlyUrl, buildTargets };
+module.exports = { parseLabel, findWatchPct, isEnded, extractOdds, monthlyUrl, buildTargets };
