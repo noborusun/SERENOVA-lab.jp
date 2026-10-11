@@ -11,6 +11,9 @@
 //             ③月次マーケットの切替(URL変更)や基準項目の変更をまたぐ比較は
 //               「前回比較なし」とする(別のマーケット同士を比べないため)
 //
+// 2026-10-11: ①「ページ内の最大%」による仮の代表値を廃止(グラフの目盛りや終了済みの結果を拾う誤りがあったため)
+//             ②マーケットが終了済み(ended)の場合は、確率を出さず「URL要更新」と表示
+//
 // 実行: node scripts/analyze.js
 
 const path = require('path');
@@ -45,19 +48,18 @@ function daysBetween(a, b) {
   return dayNumber(a) - dayNumber(b);
 }
 
-// 基準項目が決まっていないマーケット用の予備: ページ内で一番大きい%を代表値にする
-function leadingOdd(record) {
-  if (!record || !record.odds || record.odds.length === 0) return null;
-  const nums = record.odds.map((s) => parseFloat(s)).filter((n) => !isNaN(n));
-  if (nums.length === 0) return null;
-  return Math.max(...nums);
+// そのレコードの「代表値(%)」。基準項目の確率だけを使う(基準項目なし・終了済みは null)
+function repValue(record) {
+  if (!record || record.ended) return null;
+  if (record.watchLabel && typeof record.watchPct === 'number') return record.watchPct;
+  return null;
 }
 
-// そのレコードの「代表値(%)」。基準項目があればその確率、なければ予備の最大値
-function repValue(record) {
-  if (!record) return null;
-  if (record.watchLabel) return typeof record.watchPct === 'number' ? record.watchPct : null;
-  return leadingOdd(record);
+// 「数値」列に表示する文言
+function basisText(watchLabel) {
+  if (!watchLabel) return '未設定';
+  if (watchLabel === '@binary') return '「はい」の確率';
+  return watchLabel;
 }
 
 // 同じ土俵で比べられるか(同じURL=同じマーケット、同じ基準項目)
@@ -105,21 +107,24 @@ function fmtPct(v) {
 function buildRows(history, targets, date, period) {
   return targets.map((t) => {
     const current = history.find((h) => h.slug === t.slug && h.date === date);
-    const base = { label: t.label, basis: '最大値(自動)', past: '-', current: '取得不可', comment: '' };
+    const base = { label: t.label, basis: '未設定', past: '-', current: '取得不可', comment: '' };
 
     if (!current || current.status === 'error') {
       return { ...base, comment: '⚠️ データ取得失敗(ログを確認)' };
     }
 
-    base.basis = current.watchLabel || '最大値(自動)';
+    base.basis = basisText(current.watchLabel);
+    if (current.ended) {
+      return { ...base, comment: '⚠️ マーケット終了済み(結果が確定)。現行マーケットのURLへの差し替えが必要' };
+    }
     const curVal = repValue(current);
     base.current = fmtPct(curVal);
 
-    if (current.watchLabel && curVal === null) {
-      return { ...base, comment: `⚠️ 基準項目「${current.watchLabel}」がページ内で見つかりません(表示形式の変更・マーケット終了を確認)` };
+    if (!current.watchLabel) {
+      return { ...base, comment: '⚠️ 基準項目が未設定です(scripts/collect.js の watch に指定)' };
     }
-    if (!current.watchLabel && curVal === null) {
-      return { ...base, comment: '⚠️ 確率を取得できません(マーケット終了・表示形式の変更の可能性。基準項目の指定を検討)' };
+    if (curVal === null) {
+      return { ...base, comment: `⚠️ 基準項目「${basisText(current.watchLabel)}」がページ内で見つかりません(表示形式の変更を確認)` };
     }
 
     const { rec: past, status } = findPast(history, current, period);
@@ -187,7 +192,7 @@ function generate(history, state) {
     '※本レポートはPolymarket(予測市場)の確率データを機械的に収集・比較したものです。特定の投資判断を推奨するものではありません。',
     '',
     ...sections,
-    '※「数値」列は、その%が何の確率かを示します(例: ↑$90 = その価格に一度でも到達する確率)。「最大値(自動)」は基準項目が未設定のため、ページ内で一番大きい%を仮に表示しています。',
+    '※「数値」列は、その%が何の確率かを示します(例: ↑$100 = その価格に一度でも到達する確率、75,000-80,000 = 年末終値がその区分に入る確率)。',
     '※月次マーケット(原油・S&P500)は月初にリセットされるため、月をまたぐ比較は行いません。',
     '',
   ].join('\n');
