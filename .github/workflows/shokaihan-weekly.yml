@@ -30,6 +30,8 @@ jobs:
         run: node scripts/collect.js
 
       - name: Analyze and generate report
+      - name: Build note block
+        run: node scripts/make_note_block.js
         run: node scripts/analyze.js
 
       - name: Clean up old screenshots (3+ months)
