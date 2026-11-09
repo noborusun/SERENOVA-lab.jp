@@ -15,7 +15,7 @@ def main():
     upper={}
     try:
         q={"latitude":LAT,"longitude":LON,"timezone":TZ,"forecast_days":5,
-           "hourly":"temperature_850hPa,temperature_700hPa,temperature_500hPa,wind_speed_300hPa,geopotential_height_500hPa"}
+           "hourly":"temperature_900hPa,temperature_850hPa,temperature_700hPa,temperature_500hPa,wind_speed_300hPa,geopotential_height_500hPa"}
         ud=get_json("https://api.open-meteo.com/v1/forecast?"+urllib.parse.urlencode(q))
         uh=ud.get("hourly",{})
         for k in q["hourly"].split(","):
