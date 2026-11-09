@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Build SERENOVA Omiya weather JSON from Open-Meteo; never invent fallback values."""
-import json, urllib.parse, urllib.request, datetime, os, sys
+import json, urllib.parse, urllib.request, datetime, os, sys, statistics
 LAT, LON, TZ = 35.906, 139.624, "Asia/Tokyo"
 def get_json(url):
     req=urllib.request.Request(url,headers={"User-Agent":"SERENOVA-Weather/1.0"})
@@ -28,8 +28,33 @@ def main():
         ep={"latitude":LAT,"longitude":LON,"timezone":TZ,"forecast_days":20,"models":"ncep_gefs025",
             "daily":"temperature_2m_mean,temperature_2m_min,temperature_2m_max,precipitation_sum,pressure_msl_mean"}
         ed=get_json("https://ensemble-api.open-meteo.com/v1/ensemble?"+urllib.parse.urlencode(ep))
-        ensemble={"available":bool(ed.get("daily")),"model":"ncep_gefs025","daily":ed.get("daily"),
-                  "note":"GEFSアンサンブル。予報期間・メンバー数はAPIの提供範囲に依存します。"}
+        edaily=ed.get("daily") or {}
+        dates=edaily.get("time") or []
+        def member_values(prefix, index):
+            vals=[]
+            for key, arr in edaily.items():
+                if key.startswith(prefix+"_member") and index < len(arr):
+                    v=arr[index]
+                    if isinstance(v,(int,float)): vals.append(float(v))
+            return vals
+        long_range=[]
+        base_dates=set((fc.get("daily") or {}).get("time") or [])
+        for i, day in enumerate(dates):
+            if day in base_dates: continue
+            temps=member_values("temperature_2m_mean",i)
+            tmins=member_values("temperature_2m_min",i)
+            tmaxs=member_values("temperature_2m_max",i)
+            rains=member_values("precipitation_sum",i)
+            pressures=member_values("pressure_msl_mean",i)
+            if temps:
+                long_range.append({"date":day,"temp_median":round(statistics.median(temps),1),
+                  "temp_low":round(min(tmins or temps),1),"temp_high":round(max(tmaxs or temps),1),
+                  "rain_probability":round(100*sum(1 for x in rains if x>=1)/len(rains)) if rains else None,
+                  "rain_median":round(statistics.median(rains),1) if rains else None,
+                  "pressure_median":round(statistics.median(pressures),1) if pressures else None,
+                  "members":len(temps)})
+        ensemble={"available":bool(edaily),"model":"ncep_gefs025","long_range":long_range,
+                  "note":"GEFSアンサンブルのメンバー分布から集計。単一確定値ではなく幅・確率の目安です。"}
     except Exception as e: ensemble={"available":False,"note":"アンサンブル取得不可: "+str(e)[:160]}
     result={"location":"埼玉県さいたま市大宮","coordinates":{"latitude":LAT,"longitude":LON},
       "updated_at":datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9))).isoformat(timespec="minutes"),
