@@ -1,0 +1,14 @@
+{
+  "location": "埼玉県さいたま市大宮",
+  "updated_at": null,
+  "source": "Open-Meteo",
+  "daily": {
+    "time": []
+  },
+  "hourly": {
+    "time": []
+  },
+  "notes": [
+    "初回自動更新待ち。データ取得前の予報値は表示しません。"
+  ]
+}
