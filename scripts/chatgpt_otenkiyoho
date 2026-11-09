@@ -1,0 +1,12 @@
+SERENOVA-lab.jp/
+│
+├── index.html                 ← 既存LP（基本的に維持）
+│
+├── weather/
+│   ├── index.html             ← 新しい天気予報ページ
+│   ├── forecast.json          ← 予報データ
+│   └── update_forecast.py     ← データ更新プログラム
+│
+└── .github/
+    └── workflows/
+        └── weather-update.yml ← 毎朝の自動更新設定
