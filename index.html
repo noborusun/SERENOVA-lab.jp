@@ -886,35 +886,6 @@ footer {
 </script>
 </head>
 <body>
-<!-- SERENOVAオリジナル天気予報：LPの<body>直後（最上部）に貼る。旧スニペット（<!-- SERENOVAお天気予報 から </script> まで）は丸ごと削除して置き換え -->
-<style>
-#sw-line{background:linear-gradient(90deg,#0b5f6b,#0f7c86 55%,#1a9aa5);color:#fff;padding:10px 14px;box-shadow:0 2px 8px rgba(0,0,0,.18)}
-#sw-line a{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px 14px;max-width:1100px;margin:0 auto;color:#fff;text-decoration:none}
-#sw-line .sw-tag{background:#ffd166;color:#4a3300;font-weight:800;font-size:12px;letter-spacing:.06em;padding:3px 10px;border-radius:99px;animation:swp 2.4s ease-out infinite}
-#sw-line .sw-ttl{font-size:17px;font-weight:800;letter-spacing:.04em}
-#sw-line .sw-txt{flex:1 1 260px;min-width:0;font-size:13px;line-height:1.5;text-align:center;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-#sw-line .sw-btn{background:#fff;color:#0b5f6b;font-weight:800;font-size:13px;padding:6px 14px;border-radius:99px;white-space:nowrap}
-#sw-line a:hover .sw-btn{background:#ffd166}
-@keyframes swp{0%{box-shadow:0 0 0 0 rgba(255,209,102,.75)}70%,100%{box-shadow:0 0 0 9px rgba(255,209,102,0)}}
-@media(prefers-reduced-motion:reduce){#sw-line .sw-tag{animation:none}}
-</style>
-<div id="sw-line">
-  <a id="sw-link" href="weather/">
-    <span class="sw-tag">毎朝更新</span>
-    <span class="sw-ttl">🌤 SERENOVAオリジナル天気予報</span>
-    <span class="sw-txt" id="sw-txt">なぜ雨？なぜ暑い？ 「理由」まで分かる大宮の天気予報</span>
-    <span class="sw-btn">予報を見る →</span>
-  </a>
-</div>
-<script>
-fetch('weather/latest.json?'+Date.now()).then(r=>r.json()).then(j=>{
-  document.getElementById('sw-txt').textContent=j.line;
-}).catch(()=>{});
-</script>
-fetch('weather/latest.json?'+Date.now()).then(r=>r.json()).then(j=>{
-  document.getElementById('sw-link').textContent='🌤 SERENOVAお天気予報｜'+j.line+' →';
-}).catch(()=>{});
-</script>
 <!-- NAV -->
 <nav class="nav">
   <div class="nav-logo">SERE<span>NOVA</span></div>
@@ -922,11 +893,51 @@ fetch('weather/latest.json?'+Date.now()).then(r=>r.json()).then(j=>{
     <li><a href="#features">サービス</a></li>
     <li><a href="#philosophy">投資哲学</a></li>
     <li><a href="#plans">料金</a></li>
-    <li><a href="#blog">ブログ</a></li>\n    <li><a href="weather/">天気予報</a></li>
+    <li><a href="#blog">ブログ</a></li>
+    <li><a href="weather/" class="sw-nav"><span class="sw-ico">🌤</span>SERENOVAオリジナル天気予報</a></li>
     <li><a href="#ambassador" style="font-weight:500;">I<span style="color:#e85d8a;font-size:15px;">♛</span>大宮</a></li>
   </ul>
   <button class="nav-btn" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">無料で始める →</button>
 </nav>
+<!-- SERENOVAオリジナル天気予報（帯） -->
+<style>
+#sw-line{background:linear-gradient(90deg,#0b5f6b,#0f7c86 55%,#1a9aa5);color:#fff;padding:10px 14px;margin-top:72px;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+#sw-line a{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px 14px;max-width:1100px;margin:0 auto;color:#fff;text-decoration:none}
+#sw-line .sw-tag{background:#ffd166;color:#4a3300;font-weight:800;font-size:12px;letter-spacing:.06em;padding:3px 10px;border-radius:99px;animation:swp 2.4s ease-out infinite}
+#sw-line .sw-ttl{font-size:17px;font-weight:800;letter-spacing:.04em}
+#sw-line .sw-ttl .sw-ico{font-size:22px;margin-right:6px;vertical-align:-2px}
+#sw-line .sw-txt{flex:1 1 260px;min-width:0;font-size:13px;line-height:1.5;text-align:center;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+#sw-line .sw-btn{background:#fff;color:#0b5f6b;font-weight:800;font-size:13px;padding:6px 14px;border-radius:99px;white-space:nowrap}
+#sw-line a:hover .sw-btn{background:#ffd166}
+.nav-links a.sw-nav{background:linear-gradient(135deg,#ffd166,#f2b134);color:#3d2a00;font-weight:800;font-size:13px;letter-spacing:.03em;padding:7px 14px;border-radius:99px;white-space:nowrap;box-shadow:0 2px 6px rgba(242,177,52,.45);animation:swn 2.4s ease-out infinite}
+.nav-links a.sw-nav:hover{color:#3d2a00;filter:brightness(1.08)}
+.nav-links a.sw-nav .sw-ico{font-size:15px;margin-right:5px}
+@keyframes swp{0%{box-shadow:0 0 0 0 rgba(255,209,102,.75)}70%,100%{box-shadow:0 0 0 9px rgba(255,209,102,0)}}
+@keyframes swn{0%{box-shadow:0 0 0 0 rgba(242,177,52,.7)}70%,100%{box-shadow:0 0 0 9px rgba(242,177,52,0)}}
+@media(max-width:1100px){.nav-links{gap:16px}}
+@media(prefers-reduced-motion:reduce){#sw-line .sw-tag,.nav-links a.sw-nav{animation:none}}
+</style>
+<div id="sw-line">
+  <a id="sw-link" href="weather/">
+    <span class="sw-tag">毎朝更新</span>
+    <span class="sw-ttl"><span class="sw-ico">🌤</span>SERENOVAオリジナル天気予報</span>
+    <span class="sw-txt" id="sw-txt">なぜ雨？なぜ暑い？ 「理由」まで分かる大宮の天気予報</span>
+    <span class="sw-btn">予報を見る →</span>
+  </a>
+</div>
+<script>
+(function(){
+  var b=document.getElementById('sw-line'),n=document.querySelector('.nav'),
+  I={'晴':'☀️','曇':'☁️','雨':'🌧️','雪':'❄️'};
+  function fit(){b.style.marginTop=n.offsetHeight+'px'}
+  fit();addEventListener('resize',fit);addEventListener('load',fit);
+  fetch('weather/latest.json?'+Date.now()).then(function(r){return r.json()}).then(function(j){
+    document.getElementById('sw-txt').textContent=j.line;
+    var m=/大宮\s*(晴|曇|雨|雪)/.exec(j.line);
+    if(m)document.querySelectorAll('.sw-ico').forEach(function(e){e.textContent=I[m[1]]});
+  }).catch(function(){});
+})();
+</script>
 
 <!-- HERO -->
 <section class="hero">
