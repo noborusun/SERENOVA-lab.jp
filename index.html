@@ -886,11 +886,31 @@ footer {
 </script>
 </head>
 <body>
-<!-- SERENOVAお天気予報：LPの<body>直後（最上部）に貼る -->
-<div id="sw-line" style="background:#0f7c86;color:#fff;font-size:13px;line-height:1.5;padding:8px 12px;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">
-  <a id="sw-link" href="weather/" style="color:#fff;text-decoration:none">🌤 SERENOVAお天気予報｜なぜ、を説明する大宮の天気予報 →</a>
+<!-- SERENOVAオリジナル天気予報：LPの<body>直後（最上部）に貼る。旧スニペット（<!-- SERENOVAお天気予報 から </script> まで）は丸ごと削除して置き換え -->
+<style>
+#sw-line{background:linear-gradient(90deg,#0b5f6b,#0f7c86 55%,#1a9aa5);color:#fff;padding:10px 14px;box-shadow:0 2px 8px rgba(0,0,0,.18)}
+#sw-line a{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px 14px;max-width:1100px;margin:0 auto;color:#fff;text-decoration:none}
+#sw-line .sw-tag{background:#ffd166;color:#4a3300;font-weight:800;font-size:12px;letter-spacing:.06em;padding:3px 10px;border-radius:99px;animation:swp 2.4s ease-out infinite}
+#sw-line .sw-ttl{font-size:17px;font-weight:800;letter-spacing:.04em}
+#sw-line .sw-txt{flex:1 1 260px;min-width:0;font-size:13px;line-height:1.5;text-align:center;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+#sw-line .sw-btn{background:#fff;color:#0b5f6b;font-weight:800;font-size:13px;padding:6px 14px;border-radius:99px;white-space:nowrap}
+#sw-line a:hover .sw-btn{background:#ffd166}
+@keyframes swp{0%{box-shadow:0 0 0 0 rgba(255,209,102,.75)}70%,100%{box-shadow:0 0 0 9px rgba(255,209,102,0)}}
+@media(prefers-reduced-motion:reduce){#sw-line .sw-tag{animation:none}}
+</style>
+<div id="sw-line">
+  <a id="sw-link" href="weather/">
+    <span class="sw-tag">毎朝更新</span>
+    <span class="sw-ttl">🌤 SERENOVAオリジナル天気予報</span>
+    <span class="sw-txt" id="sw-txt">なぜ雨？なぜ暑い？ 「理由」まで分かる大宮の天気予報</span>
+    <span class="sw-btn">予報を見る →</span>
+  </a>
 </div>
 <script>
+fetch('weather/latest.json?'+Date.now()).then(r=>r.json()).then(j=>{
+  document.getElementById('sw-txt').textContent=j.line;
+}).catch(()=>{});
+</script>
 fetch('weather/latest.json?'+Date.now()).then(r=>r.json()).then(j=>{
   document.getElementById('sw-link').textContent='🌤 SERENOVAお天気予報｜'+j.line+' →';
 }).catch(()=>{});
