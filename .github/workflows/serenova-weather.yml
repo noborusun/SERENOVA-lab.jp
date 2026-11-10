@@ -1,0 +1,25 @@
+name: serenova-weather
+on:
+  schedule:
+    - cron: '30 20 * * *'   # 毎日 05:30 JST
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Build weather data
+        env:
+          OPEN_METEO_KEY: ${{ secrets.OPEN_METEO_KEY }}
+        run: node scripts/make_weather.js
+      - name: Commit
+        run: |
+          git config user.name "serenova-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add weather/data.json weather/latest.json
+          git diff --cached --quiet || (git commit -m "weather: daily update" && git push)
