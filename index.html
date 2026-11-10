@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
+<head>bod
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>退職金・NISA・資産管理を完全独立の立場でサポート | セレノバ金融教育ラボ</title>
@@ -886,7 +886,15 @@ footer {
 </script>
 </head>
 <body>
-
+<!-- SERENOVAお天気予報：LPの<body>直後（最上部）に貼る -->
+<div id="sw-line" style="background:#0f7c86;color:#fff;font-size:13px;line-height:1.5;padding:8px 12px;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">
+  <a id="sw-link" href="weather/" style="color:#fff;text-decoration:none">🌤 SERENOVAお天気予報｜なぜ、を説明する大宮の天気予報 →</a>
+</div>
+<script>
+fetch('weather/latest.json?'+Date.now()).then(r=>r.json()).then(j=>{
+  document.getElementById('sw-link').textContent='🌤 SERENOVAお天気予報｜'+j.line+' →';
+}).catch(()=>{});
+</script>
 <!-- NAV -->
 <nav class="nav">
   <div class="nav-logo">SERE<span>NOVA</span></div>
