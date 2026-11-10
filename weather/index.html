@@ -1,51 +1,92 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="埼玉県さいたま市大宮の20日間オリジナル天気予報。気温・降水・気圧・上空の流れを根拠とともに解説します。">
-<title>大宮20日天気予報 | SERENOVA</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SERENOVAオリジナル天気予報｜さいたま市大宮｜なぜ、を説明する天気予報</title>
+<meta name="description" content="雨も晴れも暑さも寒さも「なぜ」そうなるのかを、海水温・上空の気圧配置・偏西風・黄砂から説明する、大宮向け20日間の天気予報。">
 <style>
-:root{--deep:#1a3d35;--green:#1a5c4a;--mid:#2a7a62;--pale:#f0f8f5;--gold:#b8943f;--cream:#f8f4ed;--ink:#20251f;--muted:#69736c;--line:#e3e8e2}
-*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:"Noto Sans JP",sans-serif;line-height:1.7}a{color:inherit}
-.top{background:var(--deep);color:white;padding:14px max(20px,calc((100% - 1120px)/2));display:flex;justify-content:space-between;align-items:center;gap:16px}.brand{font-family:"Cormorant Garamond",serif;font-size:22px;letter-spacing:.08em}.top a{text-decoration:none;color:#e9d7a9;font-size:13px}
-main{max-width:1120px;margin:auto;padding:38px 22px 70px}.eyebrow{color:var(--gold);font-size:12px;letter-spacing:.16em;font-weight:700}.hero{background:linear-gradient(120deg,#173b32,#245e4b);color:#fff;border-radius:18px;padding:30px 34px;margin:12px 0 24px}.hero h1{font-size:clamp(25px,4vw,40px);line-height:1.35;margin:8px 0 12px}.hero p{color:#e2eee8;margin:0;max-width:760px}.stamp{font-size:12px;color:#d4dfd8;margin-top:18px}
-.grid{display:grid;grid-template-columns:1.15fr .85fr;gap:18px}.panel{background:#fff;border:1px solid var(--line);border-radius:15px;padding:22px;margin-bottom:18px;box-shadow:0 5px 22px #233a2d08}.panel h2{font-size:17px;color:var(--deep);margin:0 0 14px}.today{display:flex;align-items:center;gap:22px}.bigtemp{font-size:50px;font-weight:700;color:var(--deep);line-height:1}.condition{font-size:18px;font-weight:600}.muted{color:var(--muted);font-size:13px}.cause{background:var(--pale);border-left:3px solid var(--gold);padding:13px 15px;border-radius:0 9px 9px 0;margin-top:16px;font-size:14px}
-.metric{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}.metric div{background:#f7f8f5;border-radius:10px;padding:12px}.metric b{display:block;font-size:18px;color:var(--deep)}.metric span{font-size:11px;color:var(--muted)}.risk{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--line);padding:12px 0}.level{font-weight:700;color:var(--green)}.cards{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px}.day{background:#fff;border:1px solid var(--line);border-radius:11px;padding:12px 8px;text-align:center;min-width:0}.day strong{display:block;font-size:12px}.weathericon{font-size:24px;margin:7px 0}.temps{font-size:12px;font-weight:700}.rain{font-size:11px;color:#477b9a}.tablewrap{overflow:auto}table{width:100%;border-collapse:collapse;font-size:13px;min-width:600px}th,td{text-align:left;padding:11px 10px;border-bottom:1px solid var(--line)}th{color:var(--muted);font-size:11px;background:#fafbf9}td b{color:var(--deep)}.range{color:var(--muted);font-size:12px}.analysisgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.analysis{padding:15px;background:#f8faf8;border-radius:10px}.analysis h3{font-size:13px;color:var(--green);margin:0 0 6px}.analysis p{font-size:13px;margin:0}.notice{font-size:12px;color:var(--muted);line-height:1.8}.error{padding:18px;background:#fff4ef;border:1px solid #efd2c4;border-radius:10px;color:#874b35}.footer{text-align:center;color:var(--muted);font-size:11px;margin-top:28px}
-@media(max-width:760px){main{padding:24px 14px 50px}.grid{grid-template-columns:1fr}.cards{grid-template-columns:repeat(4,minmax(0,1fr))}.hero{padding:24px 20px}.analysisgrid{grid-template-columns:1fr}}
-</style></head>
-<body><header class="top"><div class="brand">SERENOVA <span style="color:#d4ac57">／</span> WEATHER COMPASS</div><a href="../index.html">SERENOVAトップへ ↗</a></header>
-<main>
-<div class="eyebrow">OMIYA · SAITAMA · DAILY WEATHER INSIGHT</div>
-<section class="hero"><div class="eyebrow" style="color:#e5c77d">SERENOVA ORIGINAL FORECAST</div><h1>大宮の天気を、<br>「なぜ」から読み解く。</h1><p>気温や降水確率だけでなく、気圧配置・湿った空気・上空の寒気や風の流れを組み合わせ、暮らしの判断に役立つ形で解説します。</p><div class="stamp" id="updated">データを読み込んでいます…</div></section>
-<div id="loadError" hidden></div>
-<div class="grid">
-<section class="panel"><h2>今日の天気・原因分析</h2><div class="today"><div class="bigtemp" id="todayTemp">—°</div><div><div class="condition" id="todayCondition">データ取得中</div><div class="muted" id="todayRange">最高 —° ／ 最低 —°</div></div></div><div class="cause" id="todayCause">最新の予報データを取得しています。データが届くまでは数値を推測して表示しません。</div><div class="metric"><div><b id="pressure">—</b><span>海面気圧</span></div><div><b id="humidity">—</b><span>相対湿度</span></div><div><b id="wind">—</b><span>平均風速</span></div></div></section>
-<section class="panel"><h2>気象負荷の目安</h2><div class="risk"><span>気圧変化</span><span class="level" id="pressureRisk">—</span></div><div class="risk"><span>気温変化</span><span class="level" id="tempRisk">—</span></div><div class="risk"><span>総合目安</span><span class="level" id="totalRisk">—</span></div><p class="notice">独自の気象変化スコアによる生活上の参考情報です。医学的な根拠に基づく体調予測・診断ではありません。気象庁の警報・注意報を優先してください。</p></section>
-</div>
-<section class="panel"><h2>今後7日間｜短期予報</h2><div class="cards" id="weekCards"><div class="muted">予報データを読み込んでいます。</div></div></section>
-<section class="panel"><h2>20日間の見通し</h2><p class="muted">1〜7日：日別予報 ／ 8〜16日：モデル予報 ／ 17〜20日：アンサンブル傾向。先の日ほど不確実性が大きくなります。</p><div class="tablewrap"><table><thead><tr><th>日付</th><th>区分</th><th>気温</th><th>降水量</th><th>気圧</th><th>見通し</th></tr></thead><tbody id="forecastRows"><tr><td colspan="6">データ取得中</td></tr></tbody></table></div></section>
-<section class="panel"><h2>天気の原因を読む｜大気の状態</h2><div class="analysisgrid"><div class="analysis"><h3>気圧の推移</h3><p id="pressureExplain">データ取得後に、前日との差を表示します。</p></div><div class="analysis"><h3>上空の気温・風</h3><p id="upperExplain">850hPa・700hPa・500hPa・300hPaのデータを確認します。</p></div><div class="analysis"><h3>湿り気・雲</h3><p id="moistExplain">湿度・雲量・降水の情報をもとに解説します。</p></div><div class="analysis"><h3>予報の確からしさ</h3><p id="confidenceExplain">予報期間とアンサンブルのばらつきを区別して表示します。</p></div></div></section>
-<section class="panel"><h2>時間別の天気｜今日</h2><div class="tablewrap"><table><thead><tr><th>時刻</th><th>天気</th><th>気温</th><th>降水確率</th><th>風速</th><th>気圧</th></tr></thead><tbody id="hourRows"><tr><td colspan="6">データ取得中</td></tr></tbody></table></div></section>
-<section class="panel"><h2>データについて</h2><p class="notice" id="sources">予報データはOpen-Meteoの気象モデルデータを利用します。実測値と予報値を混同せず、取得日時・予報期間・欠測を明示します。上空の気圧面高度は標準大気の固定高度ではなく、気温や気圧配置で変動します。</p><p class="notice">気圧面の高度は目安です：850hPa 約1.5km、700hPa 約3km、500hPa 約5.5km、300hPa 約9km。海面水温・黄砂・前線・ジェット気流など、取得データで裏付けられない要素は断定しません。</p></section>
-<div class="footer">© SERENOVA Life Shift Compass · Weather insight for Omiya, Saitama</div>
-</main>
+:root{--bg:#f4f7f8;--card:#fff;--ink:#14323a;--sub:#5b7279;--line:#dce6e8;--teal:#0f7c86;--l0:#2e9e6b;--l1:#c9a227;--l2:#e07b24;--l3:#d23b3b}
+@media(prefers-color-scheme:dark){:root{--bg:#0c1a1e;--card:#13272d;--ink:#e6f0f1;--sub:#93aab0;--line:#24404a;--teal:#4cc3cd}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,"Hiragino Sans","Noto Sans JP",sans-serif;line-height:1.7}
+main{max-width:880px;margin:0 auto;padding:20px 16px 48px}
+h1{font:italic 700 26px/1.3 Georgia,"Hiragino Mincho ProN",serif;color:var(--teal);margin:8px 0 2px}
+.sub{color:var(--sub);font-size:13px}
+h2{font-size:15px;margin:28px 0 10px;letter-spacing:.04em;color:var(--teal)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px}
+.hero{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.big{font-size:56px;line-height:1}.t{font-size:30px;font-weight:700}.t small{font-size:15px;color:var(--sub);font-weight:400}
+.why{margin:12px 0 0;font-size:15px}
+.gauge{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.pill{color:#fff;font-weight:700;padding:6px 18px;border-radius:99px;font-size:18px}
+.l0{background:var(--l0)}.l1{background:var(--l1)}.l2{background:var(--l2)}.l3{background:var(--l3)}
+.chips{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.chip{font-size:12px;border:1px solid var(--line);border-radius:10px;padding:4px 10px}
+.chip b{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px}
+.strip{display:flex;gap:8px;overflow-x:auto;padding-bottom:8px}
+.day{flex:0 0 88px;text-align:center;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 4px;font-size:12px;cursor:pointer}
+.day.on{border-color:var(--teal);box-shadow:0 0 0 2px var(--teal) inset}
+.day .e{font-size:26px}.day i{display:block;height:4px;border-radius:2px;margin:6px 10px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px}
+.tile h3{margin:0 0 4px;font-size:12px;color:var(--sub);font-weight:600}.tile .v{font-size:20px;font-weight:700}.tile p{margin:4px 0 0;font-size:12px;color:var(--sub)}
+.al{margin:0 0 10px}.al b{display:block}
+.fine{font-size:11.5px;color:var(--sub);margin-top:28px}.fine a{color:var(--teal)}
+</style>
+</head>
+<body><main>
+<div class="sub">SERENOVA</div>
+<h1>オリジナル天気予報</h1>
+<div class="sub" id="meta">読み込み中…</div>
+
+<h2>選んだ日の「なぜ」</h2>
+<div class="card" id="hero"></div>
+
+<h2>自律神経バロメータ（気圧の変動から見た体調の目安）</h2>
+<div class="card" id="auto"></div>
+
+<h2>20日先までの流れ（日付をタップ）</h2>
+<div class="strip" id="strip"></div>
+<div class="sub">気象モデルで日別に追えるのは16日先まで。17〜20日先は、
+<a href="https://www.jma.go.jp/" style="color:var(--teal)">気象庁の1か月予報・2週間気温予報</a>で大きな傾向を確認してください。</div>
+
+<h2>上空と海の分析（選んだ日）</h2>
+<div class="grid" id="ana"></div>
+
+<h2>季節アラート（今日〜3日先）</h2>
+<div class="card" id="alerts"></div>
+
+<p class="fine">この予報は、AI（佐助／Claude）が公開の気象モデルデータを基に自動生成した独自の解説です。気象庁の予報ではありません。
+大雨・台風・熱中症などの防災判断は、必ず<a href="https://www.jma.go.jp/">気象庁</a>・自治体の情報を優先してください。
+自律神経バロメータは気圧の変化量による独自の目安であり、医療上の診断・助言ではありません。
+気象データ：<a href="https://open-meteo.com/">Open-Meteo</a>（CC BY 4.0）。平年値は東京の平年最高気温を目安に使用。
+<br>© SERENOVA（セレノバ金融教育ラボ）｜<a href="../">ライフシフト・コンパス</a></p>
+
 <script>
-const $=id=>document.getElementById(id),fmt=(v,d=0)=>Number.isFinite(v)?v.toFixed(d):"—",dateLabel=s=>{const d=new Date(s+"T00:00:00+09:00");return (d.getMonth()+1)+"/"+d.getDate()+"("+["日","月","火","水","木","金","土"][d.getDay()]+")"},weather=c=>({0:"快晴",1:"晴れ",2:"一部曇り",3:"曇り",45:"霧",48:"着氷性の霧",51:"弱い霧雨",53:"霧雨",55:"強い霧雨",61:"弱い雨",63:"雨",65:"強い雨",71:"弱い雪",73:"雪",75:"大雪",80:"にわか雨",81:"強いにわか雨",82:"激しいにわか雨",95:"雷雨",96:"ひょうを伴う雷雨",99:"強い雷雨"}[c]||"天気情報"),icon=c=>c===0||c===1?"☀️":c===2?"🌤️":c===3?"☁️":[45,48].includes(c)?"🌫️":[51,53,55,61,63,65,80,81,82].includes(c)?"🌧️":[71,73,75].includes(c)?"❄️":"⛈️";
-function causeText(d,prev){let a=[];if(Number.isFinite(d.pressure_msl_mean)&&Number.isFinite(prev)){let x=prev-d.pressure_msl_mean;a.push(x<=-4?"翌日に向けて海面気圧が低下する予報です。低気圧や気圧の谷の接近・通過に伴う変化の可能性があります。":x>=4?"翌日に向けて海面気圧が上昇する予報です。高気圧側への移行や低気圧通過後の回復傾向が考えられます。":"翌日に向けた海面気圧の変化は比較的小さく、気圧配置は大きく変わらない見込みです。")}if(Number.isFinite(d.precipitation_sum)&&d.precipitation_sum>=1)a.push("降水量が予想されており、湿った空気や雲の発達が影響する可能性があります。");else a.push("まとまった降水は予想されていません。");return a.join(" ")}
-function riskText(n){return n>=8?"警戒":n>=5?"注意":n>=2?"やや注意":"小さい"}
-async function init(){try{const res=await fetch("./forecast.json?ts="+Date.now(),{cache:"no-store"});if(!res.ok)throw Error("予報データを取得できません");const j=await res.json();if(!j.daily||!j.daily.time?.length)throw Error("予報データはまだ準備中です");const d=j.daily,h=j.hourly||{},now=j.current||{};$("updated").textContent="データ更新："+(j.updated_at||"不明")+" ／ 出典："+(j.source||"Open-Meteo")+" ／ "+(j.location||"さいたま市大宮");
-const t=now.temperature_2m??d.temperature_2m_mean?.[0];$("todayTemp").textContent=fmt(t)+"°";$("todayCondition").textContent=weather(now.weather_code??d.weather_code?.[0]);$("todayRange").textContent="最高 "+fmt(d.temperature_2m_max?.[0])+"° ／ 最低 "+fmt(d.temperature_2m_min?.[0])+"°";$("todayCause").textContent=causeText(Object.fromEntries(Object.keys(d).map(k=>[k,d[k]?.[0]])),d.pressure_msl_mean?.[1]);$("pressure").textContent=fmt(now.pressure_msl??d.pressure_msl_mean?.[0])+" hPa";$("humidity").textContent=fmt(now.relative_humidity_2m??d.relative_humidity_2m_mean?.[0])+"%";$("wind").textContent=fmt(now.wind_speed_10m??d.wind_speed_10m_mean?.[0])+" km/h";
-const dp=Math.abs((d.pressure_msl_mean?.[1]??d.pressure_msl_mean?.[0])-(d.pressure_msl_mean?.[0]??d.pressure_msl_mean?.[1]));const dt=Math.abs((d.temperature_2m_mean?.[1]??d.temperature_2m_mean?.[0])-(d.temperature_2m_mean?.[0]??d.temperature_2m_mean?.[1]));$("pressureRisk").textContent=Number.isFinite(dp)?riskText(dp):"データなし";$("tempRisk").textContent=Number.isFinite(dt)?riskText(dt):"データなし";$("totalRisk").textContent=Number.isFinite(dp+dt/2)?riskText(dp+dt/2):"データなし";
-$("weekCards").innerHTML=d.time.slice(0,7).map((day,i)=>'<div class="day"><strong>'+dateLabel(day)+'</strong><div class="weathericon">'+icon(d.weather_code?.[i])+'</div><div class="temps">'+fmt(d.temperature_2m_max?.[i])+'° / '+fmt(d.temperature_2m_min?.[i])+'°</div><div class="rain">☂ '+fmt(d.precipitation_probability_max?.[i])+'%</div></div>').join("");
-const baseRows=d.time.map((day,i)=>{let period=i<7?"短期":"中期";let conf=i<7?"比較的高い":"変動あり";return '<tr><td><b>'+dateLabel(day)+'</b></td><td>'+period+'</td><td>'+fmt(d.temperature_2m_min?.[i])+'〜'+fmt(d.temperature_2m_max?.[i])+'℃</td><td>'+fmt(d.precipitation_sum?.[i],1)+' mm</td><td>'+fmt(d.pressure_msl_mean?.[i])+' hPa</td><td class="range">'+conf+'</td></tr>'});const ext=(j.ensemble?.long_range||[]).slice(0,20-d.time.length).map(x=>'<tr><td><b>'+dateLabel(x.date)+'</b></td><td>長期傾向</td><td>'+fmt(x.temp_low)+'〜'+fmt(x.temp_high)+'℃</td><td>降水確率目安 '+fmt(x.rain_probability)+'%</td><td>'+fmt(x.pressure_median)+' hPa</td><td class="range">GEFS・'+x.members+'メンバー</td></tr>');$("forecastRows").innerHTML=baseRows.concat(ext).join("")||'<tr><td colspan="6">長期データは取得できませんでした</td></tr>';
-$("pressureExplain").textContent=Number.isFinite(d.pressure_msl_mean?.[0])?"今日 "+fmt(d.pressure_msl_mean[0])+"hPa。翌日 "+fmt(d.pressure_msl_mean?.[1])+"hPa。日ごとの変化を確認してください。":"気圧データは未取得です.";
-const upper=j.upper_air||{};$("upperExplain").textContent=upper.summary||"上空の気温・風データは未取得です.";
-$("moistExplain").textContent="今日の平均湿度 "+fmt(d.relative_humidity_2m_mean?.[0])+"%。雲量 "+fmt(d.cloud_cover_mean?.[0])+"%。降水量 "+fmt(d.precipitation_sum?.[0],1)+"mm。";
-$("confidenceExplain").textContent="短期は日別モデル予報、中期以降はモデルの予報期間と不確実性を考慮します。アンサンブルのばらつきが取得できない場合、確率を表示しません.";
-const times=h.time||[];let idx=times.map((x,i)=>x.slice(0,10)===d.time[0]?i:-1).filter(x=>x>=0);$("hourRows").innerHTML=idx.filter((x,k)=>k%3===0).map(i=>'<tr><td>'+times[i].slice(11,16)+'</td><td>'+weather(h.weather_code?.[i])+'</td><td>'+fmt(h.temperature_2m?.[i])+'℃</td><td>'+fmt(h.precipitation_probability?.[i])+'%</td><td>'+fmt(h.wind_speed_10m?.[i])+' km/h</td><td>'+fmt(h.pressure_msl?.[i])+' hPa</td></tr>').join("")||'<tr><td colspan="6">時間別データはありません</td></tr>';
-$("sources").textContent="取得："+(j.updated_at||"不明")+"。基礎予報："+(j.model||"Open-Meteo forecast")+"。長期部分はGEFSアンサンブルが提供する日付のみ表示。出典：Open-Meteo（利用条件・出典表示に従って利用）。";
-}catch(e){$("loadError").hidden=false;$("loadError").className="error";$("loadError").textContent=e.message+"。自動更新後に再読み込みしてください。推測値は表示していません。";$("updated").textContent="予報データ未更新";}}
-init();
-</script></body></html>
+const E={晴:'☀️',曇:'☁️',雨:'🌧️',雪:'❄️'},LV=['安全','やや注意','注意','警戒'],
+MSG=['気圧は安定。体調の波は小さめの日です。','気圧がやや下降。肩こり・眠気・だるさに少し注意。','気圧が大きく動く日。頭痛・めまいが出やすい人は早めの休息を。','急な気圧低下。無理な予定は避け、睡眠と水分を優先してください。'],
+$=s=>document.querySelector(s),wd=s=>'日月火水木金土'[new Date(s+'T12:00:00Z').getUTCDay()],
+md=s=>`${+s.slice(5,7)}/${+s.slice(8)}(${wd(s)})`;
+fetch('data.json?'+Date.now()).then(r=>r.json()).then(D=>{
+  $('#meta').textContent=`${D.place}｜${new Date(D.updated).toLocaleString('ja-JP',{timeZone:'Asia/Tokyo'})} 更新`;
+  $('#strip').innerHTML=D.days.map((x,i)=>`<div class="day" data-i="${i}">${i?md(x.date):'今日'}<div class="e">${E[x.cls]}</div>${Math.round(x.tmax)}°/${Math.round(x.tmin)}°<i class="l${x.auto.lv}"></i></div>`).join('');
+  $('#alerts').innerHTML=D.alerts.length?D.alerts.map(a=>`<p class="al"><b>${a.title}</b>${a.body}</p>`).join(''):'<span class="sub">今は特別な季節アラートはありません。</span>';
+  const show=i=>{const x=D.days[i];
+    document.querySelectorAll('.day').forEach((e,k)=>e.classList.toggle('on',k==i));
+    $('#hero').innerHTML=`<div class="hero"><div class="big">${E[x.cls]}</div><div><div class="sub">${md(x.date)} 大宮</div><div class="t">${x.cls} <small>最高 ${Math.round(x.tmax)}℃ / 最低 ${Math.round(x.tmin)}℃｜降水 ${x.pr}mm｜湿度 ${x.rh}%</small></div></div></div><p class="why">${x.why}</p>`;
+    $('#auto').innerHTML=`<div class="gauge"><span class="pill l${x.auto.lv}">${LV[x.auto.lv]}</span><span>${MSG[x.auto.lv]}</span></div>
+      <div class="chips"><span class="chip">24時間の最大低下 ${x.auto.drop}hPa</span><span class="chip">1日の振れ幅 ${x.auto.rng}hPa</span></div>
+      <div class="chips">${D.days.slice(0,7).map(y=>`<span class="chip"><b class="l${y.auto.lv}"></b>${md(y.date)} ${LV[y.auto.lv]}</span>`).join('')}</div>`;
+    const a=D.analysis,z7=x.z7-3012,
+    sstT=(a.sst||[]).map(s=>`<div class="tile"><h3>海面水温 ${s.name}</h3><div class="v">${s.now??'–'}℃</div><p>30日前比 ${s.d30==null?'–':(s.d30>0?'+':'')+s.d30}℃。海が暖かいほど水蒸気が増え、雨雲の燃料になります。</p></div>`).join('');
+    $('#ana').innerHTML=`<div class="tile"><h3>上空1000m付近（900hPa）</h3><div class="v">${x.z9} m</div><p>標準は約988m。高いほど高気圧、低いほど低気圧側。</p></div>
+      <div class="tile"><h3>上空3000m付近（700hPa）</h3><div class="v">${x.z7} m</div><p>${z7>10?'標準より高く、高気圧が張り出して晴れやすい配置。':z7<-25?'標準より低く、気圧の谷・寒気で崩れやすい配置。':'ほぼ標準的な高さ。'}</p></div>
+      <div class="tile"><h3>上空1500m付近の気温</h3><div class="v">${x.t850}℃</div><p>${x.t850<0?'0℃未満は強い寒気。':x.t850>12?'暖気に覆われています。':'平年並みの目安。'}</p></div>
+      <div class="tile"><h3>偏西風（上空10km付近）</h3><div class="v">北緯${x.jet}度</div><p>風速の最大は約${x.jspd}m/s。${x.jet<=36?'関東の南〜真上を通り、低気圧が来やすい。':'関東より北を通り、高気圧に覆われやすい。'}</p></div>
+      ${sstT}<div class="tile"><h3>黄砂（直近5日の最大）</h3><div class="v">${a.dust==null?'–':a.dust} µg/m³</div><p>${a.dust==null?'':a.dust>=100?'多め。洗濯物・マスクに注意。':a.dust>=30?'やや飛来の可能性。':'目立った飛来は見込まれません。'}</p></div>`;
+  };
+  document.querySelectorAll('.day').forEach(e=>e.onclick=()=>show(+e.dataset.i));
+  show(0);
+}).catch(()=>{$('#meta').textContent='データを読み込めませんでした。しばらくしてから再度お試しください。'});
+</script>
+</main></body></html>
