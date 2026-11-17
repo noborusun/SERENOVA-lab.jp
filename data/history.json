@@ -2581,5 +2581,194 @@
     "ended": false,
     "modalDismissed": false,
     "status": "ok"
+  },
+  {
+    "date": "2026-11-17",
+    "id": "01",
+    "slug": "nikkei225",
+    "label": "日経225(年末終値)",
+    "url": "https://polymarket.com/ja/event/nikkei-225-close-price-end-of-2026",
+    "screenshot": "screenshots/2026-11-17/01_nikkei225.png",
+    "odds": [
+      "18.5%",
+      "28%",
+      "19.6%",
+      "34.2%",
+      "0%",
+      "15%"
+    ],
+    "watchLabel": "75,000-80,000",
+    "watchPct": 2,
+    "ended": false,
+    "modalDismissed": false,
+    "status": "ok"
+  },
+  {
+    "date": "2026-11-17",
+    "id": "02",
+    "slug": "usdjpy",
+    "label": "USD/JPY(年末終値)",
+    "url": "https://polymarket.com/ja/event/usdjpy-close-price-end-of-2026",
+    "screenshot": "screenshots/2026-11-17/02_usdjpy.png",
+    "odds": [
+      "9%",
+      "9.8%",
+      "48%",
+      "22%",
+      "0%",
+      "15%"
+    ],
+    "watchLabel": "150-160",
+    "watchPct": 48,
+    "ended": false,
+    "modalDismissed": false,
+    "status": "ok"
+  },
+  {
+    "date": "2026-11-17",
+    "id": "03",
+    "slug": "wti",
+    "label": "WTI原油(当月)",
+    "url": "https://polymarket.com/ja/event/what-price-will-wti-hit-in-november-2026",
+    "screenshot": "screenshots/2026-11-17/03_wti.png",
+    "odds": [
+      "100.0%",
+      "100.0%",
+      "100.0%",
+      "100.0%",
+      "0%",
+      "25%"
+    ],
+    "watchLabel": "↑$100",
+    "watchPct": 7,
+    "ended": false,
+    "modalDismissed": false,
+    "status": "ok"
+  },
+  {
+    "date": "2026-11-17",
+    "id": "04",
+    "slug": "gold",
+    "label": "ゴールド(GC・12月末まで)",
+    "url": "https://polymarket.com/ja/event/what-will-gold-gc-hit-by-end-of-december",
+    "screenshot": "screenshots/2026-11-17/04_gold.png",
+    "odds": [
+      "4.1%",
+      "21%",
+      "2.8%",
+      "1%",
+      "0%",
+      "15%"
+    ],
+    "watchLabel": "↑$5,000",
+    "watchPct": 4,
+    "ended": false,
+    "modalDismissed": false,
+    "status": "ok"
+  },
+  {
+    "date": "2026-11-17",
+    "id": "05",
+    "slug": "spy",
+    "label": "S&P500(SPY・当月)",
+    "url": "https://polymarket.com/ja/event/what-price-will-spy-hit-in-november-2026",
+    "screenshot": "screenshots/2026-11-17/05_spy.png",
+    "odds": [
+      "100.0%",
+      "100.0%",
+      "100.0%",
+      "100.0%",
+      "20%",
+      "40%"
+    ],
+    "watchLabel": "↑$800",
+    "watchPct": 1,
+    "ended": false,
+    "modalDismissed": false,
+    "status": "ok"
+  },
+  {
+    "date": "2026-11-17",
+    "id": "06",
+    "slug": "midterms",
+    "label": "2026年中間選挙",
+    "url": "https://polymarket.com/ja/event/balance-of-power-2026-midterms",
+    "screenshot": "screenshots/2026-11-17/06_midterms.png",
+    "odds": [
+      "100.0%",
+      "1%",
+      "1%",
+      "1%",
+      "0%",
+      "25%"
+    ],
+    "watchLabel": "民主党圧勝",
+    "watchPct": null,
+    "ended": false,
+    "modalDismissed": false,
+    "status": "ok"
+  },
+  {
+    "date": "2026-11-17",
+    "id": "07",
+    "slug": "hormuz",
+    "label": "ホルムズ海峡(12/31までに正常化)",
+    "url": "https://polymarket.com/ja/event/strait-of-hormuz-traffic-returns-to-normal-by-december-31",
+    "screenshot": "screenshots/2026-11-17/07_hormuz.png",
+    "odds": [
+      "5%",
+      "0%",
+      "25%",
+      "50%",
+      "75%",
+      "100%"
+    ],
+    "watchLabel": "@binary",
+    "watchPct": 5,
+    "ended": false,
+    "modalDismissed": false,
+    "status": "ok"
+  },
+  {
+    "date": "2026-11-17",
+    "id": "08",
+    "slug": "iran",
+    "label": "イラン封鎖解除(12/31まで)",
+    "url": "https://polymarket.com/ja/event/us-announces-end-of-iranian-blockade-byptptpt-20260713152715080",
+    "screenshot": "screenshots/2026-11-17/08_iran.png",
+    "odds": [
+      "5.1%",
+      "11%",
+      "18.7%",
+      "54%",
+      "0%",
+      "25%"
+    ],
+    "watchLabel": "12月31日",
+    "watchPct": 19,
+    "ended": false,
+    "modalDismissed": false,
+    "status": "ok"
+  },
+  {
+    "date": "2026-11-17",
+    "id": "09",
+    "slug": "fedhike",
+    "label": "FRB(年内にもう一度利上げ)",
+    "url": "https://polymarket.com/ja/event/another-fed-rate-hike-in-2026",
+    "screenshot": "screenshots/2026-11-17/09_fedhike.png",
+    "odds": [
+      "96%",
+      "40%",
+      "55%",
+      "70%",
+      "85%",
+      "100%"
+    ],
+    "watchLabel": "@binary",
+    "watchPct": 96,
+    "ended": false,
+    "modalDismissed": false,
+    "status": "ok"
   }
 ]
